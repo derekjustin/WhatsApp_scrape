@@ -1,0 +1,7 @@
+Join a group
+Join groups
+list groups of account
+retrieve messages from specific group
+retrieve messages from all groups
+(selenium to scroll to timestamp)
+(use backup feature of whatsapp into google drive)
