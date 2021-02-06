@@ -14,7 +14,7 @@ setuptools.setup(
     tests_require=[],
     entry_points={
         'console_scripts': [
-            'foo = scrape.foo:main',
+            'foo = scrape.foo:main', 'scrape = scrape.whatsapp_scrape:main',
         ],
     },
 )
