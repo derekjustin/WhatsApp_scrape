@@ -7,8 +7,8 @@ setuptools.setup(
     name='scrape',
     version="0.1.0",
     description="WhatsApp Scaper.",
-    author='Derek Holsapple',
-    author_email='derekhols31@gmail.com',
+    author='Derek Holsapple', 'Justin Strelka'
+    author_email='derekhols31@gmail.com', 'justin.strelka@outlook.com'
     packages=['scrape'],
     install_requires=[],
     tests_require=[],
