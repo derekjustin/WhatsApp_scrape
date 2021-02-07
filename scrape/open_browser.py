@@ -9,9 +9,4 @@ def main():
     options = webdriver.ChromeOptions()
     options.add_argument("user-data-dir=/home/jstrelka/.config/google-chrome")
     driver = webdriver.Chrome(executable_path='scrape/browser_driver/chromedriver', chrome_options=options)
-    driver.get("https://web.whatsapp.com/")
-
-
-    time.sleep(10)
-
-    driver.quit()
+    driver.get("https://google.com")
