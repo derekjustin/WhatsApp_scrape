@@ -7,14 +7,14 @@ setuptools.setup(
     name='scrape',
     version="0.1.0",
     description="WhatsApp Scaper.",
-    author='Derek Holsapple', 'Justin Strelka'
-    author_email='derekhols31@gmail.com', 'justin.strelka@outlook.com'
+    author='Derek Holsapple Justin Strelka',
+    author_email='derekhols31@gmail.com justin.strelka@outlook.com',
     packages=['scrape'],
     install_requires=[],
     tests_require=[],
     entry_points={
         'console_scripts': [
-            'foo = scrape.foo:main', 'join_groups = scrape.join_groups:main',
+            'foo = scrape.foo:main', 'scrape = scrape.open_browser:main',
         ],
     },
 )

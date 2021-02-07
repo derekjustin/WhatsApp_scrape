@@ -3,6 +3,8 @@ echo "    INSTALLING WHATSAPP SCRAPPER\n"
 echo "####################################\n"
 
 rm activate
+rm -fr scrape.egg-info
+rm -fr WhatsApp_scrape-venv
 
 # Create a venv using the name of the directory we're in, and created a symlink
 #to the activate script.
