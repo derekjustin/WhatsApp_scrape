@@ -5,13 +5,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 #Application Created Code
-from scrape.open_browser import OpenBrowser
+from scrape.browser_tools import BrowserTools
 
 
 
 def join_groups():
 
-    browser = OpenBrowser()
+    browser = BrowserTools()
     browser.go_to_url('https://google.com')
     time.sleep(5)
     browser.go_to_url('https://web.whatsapp.com')

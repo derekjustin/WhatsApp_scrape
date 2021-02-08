@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 #Application Created Code
 from scrape.system_tools import SystemTools
 
-class OpenBrowser:
+class BrowserTools:
     #############
     # Class to use the selenium library to navigate the
     #    Google Chrome Browser
