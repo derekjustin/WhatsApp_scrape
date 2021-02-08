@@ -5,16 +5,16 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 #Application Created Code
-from scrape.open_browser import openBrowser
+from scrape.open_browser import OpenBrowser
 
 
 
-def main():
+def join_groups():
 
-    browser = openBrowser()
-    browser.goToUrl('https://google.com')
+    browser = OpenBrowser()
+    browser.go_to_url('https://google.com')
     time.sleep(5)
-    browser.goToUrl('https://web.whatsapp.com')
+    browser.go_to_url('https://web.whatsapp.com')
     time.sleep(5)
     browser.close()
     #if browser open 

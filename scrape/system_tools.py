@@ -1,20 +1,20 @@
 from appdirs import *
 
 
-class systemTools:
+class SystemTools:
      #############
      # Class to manage file pathing for cross platforms
      ############# 
      def __init__(self):
            
           #appdirs will get the Google Chrome .config file across platforms
-          appname                = "google-chrome"
-          appauthor              = "Google"
-          self.configPath        = user_config_dir(appname , appauthor)
+          app_name                = "google-chrome"
+          app_author              = "Google"
+          self.config_path        = user_config_dir(app_name , app_author)
 
-          self.currentWorkingDir = os.getcwd()
+          self.current_working_dir = os.getcwd()
 
-     def getChromeConfigPath(self):
+     def get_chrome_config_path(self):
             #############
             # Get the path of the .config for Google Chrome App
             #
@@ -24,9 +24,9 @@ class systemTools:
             #           The configuration path of the Google
             #             Chrome App
             #############
-            return self.configPath
+            return self.config_path
 
-     def getCwdPath(self):
+     def get_cwd_path(self):
             #############
             # Get the WhatsApp_scrape working directory
             #
@@ -36,4 +36,4 @@ class systemTools:
             #           The path of the working directory of the 
             #             WhatsApp_scrape Application
             #############
-          return self.currentWorkingDir
+          return self.current_working_dir

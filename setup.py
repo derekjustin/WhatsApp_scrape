@@ -14,7 +14,7 @@ setuptools.setup(
     tests_require=[],
     entry_points={
         'console_scripts': [
-            'foo = scrape.foo:main', 'join_groups = scrape.join_groups:main',
+            'foo = scrape.foo:main', 'open_browser = scrape.open_browser:OpenBrowser'
         ],
     },
 )

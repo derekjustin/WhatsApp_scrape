@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 #Application Created Code
 from scrape.systemTools import systemTools
 
-class openBrowser:
+class OpenBrowser:
     #############
     # Class to use the selenium library to navigate the
     #    Google Chrome Browser
@@ -24,7 +24,7 @@ class openBrowser:
                                              '/scrape/browser_driver/chromedriver',
                                              chrome_options=options)
 
-      def goToUrl(self, goToUrl):
+      def go_to_url(self, go_to_url):
            #############
            # Open up the browser and navigate to Url 
            #
@@ -33,7 +33,7 @@ class openBrowser:
            # goToUrl : string
            #           the url the user wants the browser to open 
            #############
-           self.driver.get( goToUrl )
+           self.driver.get(go_to_url)
       
       def close(self):
            #############
