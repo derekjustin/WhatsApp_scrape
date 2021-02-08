@@ -26,6 +26,6 @@ echo "######################################################################\n"
 
 echo "   foo"
 echo "      description: print hello world\n"
-echo "   join_groups"
+echo "   open_browser"
 echo "      description: Open up the browser and go to google.com\n"
 
