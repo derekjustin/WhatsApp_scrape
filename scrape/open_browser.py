@@ -5,9 +5,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 #Application Created Code
-from scrape.systemTools import systemTools
+from scrape.system_tools import SystemTools
 
-class openBrowser:
+class OpenBrowser:
     #############
     # Class to use the selenium library to navigate the
     #    Google Chrome Browser
@@ -16,15 +16,15 @@ class openBrowser:
       def __init__(self):
            
            #Setup the selenium drivers
-           system_tools = systemTools()
+           system_tools = SystemTools()
            options = webdriver.ChromeOptions()
-           options.add_argument("user-data-dir=" + system_tools.getChromeConfigPath() )
+           options.add_argument("user-data-dir=" + system_tools.get_chrome_config_path() )
 
-           self.driver = webdriver.Chrome(executable_path= system_tools.getCwdPath() +
+           self.driver = webdriver.Chrome(executable_path= system_tools.get_cwd_path() +
                                              '/scrape/browser_driver/chromedriver',
                                              chrome_options=options)
 
-      def goToUrl(self, goToUrl):
+      def go_to_url(self, go_to_url):
            #############
            # Open up the browser and navigate to Url 
            #
@@ -33,7 +33,7 @@ class openBrowser:
            # goToUrl : string
            #           the url the user wants the browser to open 
            #############
-           self.driver.get( goToUrl )
+           self.driver.get(go_to_url)
       
       def close(self):
            #############
