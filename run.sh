@@ -24,8 +24,6 @@ echo "    Once the steps above are verified execute one of the commands"
 echo "        below to start scraping!" 
 echo "######################################################################\n"
 
-echo "   foo"
-echo "      description: print hello world\n"
 echo "   group_tools"
 echo "      description: Open GroupTools menu\n"
 
