@@ -1,8 +1,10 @@
 import time
+
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException
 
 #Application Created Code
 from scrape.system_tools import SystemTools
@@ -26,6 +28,23 @@ class GroupTools:
              self.browser.open_browser()
          group_link = input("Please enter a WhatsApp group link: ")
          self.browser.go_to_url(group_link)
-         time.sleep(3)
+         try:
+             WebDriverWait(self.browser.driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "//a[@title='Follow this link to join']")))
+         except TimeoutException:
+             pass
+         self.browser.driver.find_element_by_xpath("//a[@title='Follow this link to join']").click()
+         try:
+             WebDriverWait(self.browser.driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "//a[@class='_36or' and text()='use WhatsApp Web']")))
+         except TimeoutException:
+             pass
+         self.browser.driver.find_element_by_xpath("//a[@class='_36or' and text()='use WhatsApp Web']").click()
+         #self.browser.driver.find_element_by_link_text("use WhatsApp Web").click()
+         try:
+             WebDriverWait(self.browser.driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "//div[@class='_2xUEC _2XHG4' and text()='Join group']")))
+         except TimeoutException:
+             pass
+         self.browser.driver.find_element_by_xpath("//div[@class='_2xUEC _2XHG4' and text()='Join group']").click()
+         time.sleep(30)
+         
 
         
