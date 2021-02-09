@@ -19,5 +19,13 @@ class GroupTools:
          time.sleep(5)
          browser.close()"""
 
-     def join_groups(self):
-          print("Im a tool.")
+     def join_group(self):
+         if  self.browser.check_browser_status() == "Alive":
+             pass
+         else:
+             self.browser.open_browser()
+         group_link = input("Please enter a WhatsApp group link: ")
+         self.browser.go_to_url(group_link)
+         time.sleep(3)
+
+        
