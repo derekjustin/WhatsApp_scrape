@@ -8,6 +8,5 @@ def print_endpoints():
     "Once the steps above are verified execute one of the commands\n" +
     "below to start scraping!\n" +
     80 * '#' + "\n\n" +
-    "\tgroup_tools\n\t\tdescription: Open GroupTools menu\n\n")
-
-print_endpoints()
+    "\tgroup_tools\n\t\tdescription: Open GroupTools menu\n\n"+
+    "\tdeactivate\n\t\tdescription: Close the python virtual environment\n\n")

@@ -13,4 +13,4 @@ echo "####################################\n"
 # Run tests!
 py.test
 
-python scrape/print_tools.py
+python -c 'from scrape.print_endpoints import *; print_endpoints()'
