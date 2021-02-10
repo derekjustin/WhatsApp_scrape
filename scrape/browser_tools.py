@@ -31,6 +31,30 @@ class BrowserTools:
                 return "Alive"
            except:
                 return "Dead"
+     
+      def browser_find_element_by_xpath_with_wait(self, element_description):
+           element = ''
+           timeout_counter = 0
+           while not element and timeout_counter <= 60:
+                timeout_counter += 1
+                time.sleep(2)
+                try:
+                     element = self.driver.find_element_by_xpath(element_description)
+                except:
+                     continue
+           return element
+
+      def browser_find_element_by_link_text_with_wait(self, link_description):
+           element = ''
+           timeout_counter = 0
+           while not element and timeout_counter <= 60:
+                timeout_counter += 1
+                time.sleep(2)
+                try:
+                     element = self.driver.find_element_by_link_text(link_description)
+                except:
+                     continue
+           return element           
            
       def go_to_url(self, go_to_url):
            #############

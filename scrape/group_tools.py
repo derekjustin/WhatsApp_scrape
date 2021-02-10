@@ -27,17 +27,9 @@ class GroupTools:
          else:
              self.browser.open_browser()
          group_link = input("Please enter a WhatsApp group link: ")
-         self.browser.go_to_url(group_link)
-         #WebDriverWait(self.browser.driver, 1).until(EC.presence_of_element_located((By.CSS_SELECTOR, "//a[@title='Follow this link to join']")))
-         WebDriverWait(self.browser.driver, 3).until(lambda x: x.find_element_by_xpath("//a[@title='Follow this link to join']"))
-         self.browser.driver.find_element_by_xpath("//a[@title='Follow this link to join']").click()
-         #WebDriverWait(self.browser.driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "//a[@class='_36or' and text()='use WhatsApp Web']")))
-         WebDriverWait(self.browser.driver, 3).until(lambda x: x.find_element_by_xpath("//a[text()='use WhatsApp Web']"))
-         self.browser.driver.find_element_by_xpath("//a[@class='_36or' and text()='use WhatsApp Web']").click()
-         #WebDriverWait(self.browser.driver, 3).until(EC.presence_of_element_located((By.CSS_SELECTOR, "//div[@class='_2xUEC _2XHG4' and text()='Join group']")))
-         WebDriverWait(self.browser.driver, 3).until(lambda x: x.find_element_by_xpath("//div[@class='_2xUEC _2XHG4' and text()='Join group']"))
-         self.browser.driver.find_elements_by_xpath("//div[@class='_2xUEC _2XHG4' and text()='Join group']").click()
-         time.sleep(30)
-         
+         self.browser.go_to_url(group_link)     
+         self.browser.browser_find_element_by_xpath_with_wait("//a[@title='Follow this link to join']").click()
+         self.browser.browser_find_element_by_link_text_with_wait("use WhatsApp Web").click()
+         self.browser.browser_find_element_by_xpath_with_wait("//div[text()='Join group']").click()
+         time.sleep(3)
 
-        
