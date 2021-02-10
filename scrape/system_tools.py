@@ -1,6 +1,5 @@
 from appdirs import *
 
-
 class SystemTools:
      #############
      # Class to manage file pathing for cross platforms
