@@ -1,4 +1,5 @@
 from scrape.group_tools import GroupTools
+from scrape.print_endpoints import *
 
 def main():
     tool = GroupTools()
@@ -8,6 +9,8 @@ def main():
         if user_input == ("join_group"):
             tool.join_group()
         elif user_input == ("quit"):
-            quit()
+            break
         else:
             print("\n\n******** PLEASE ENTER A VALID OPTION OR 'quit' TO END PROGRAM.\n")
+    print_endpoints()
+    quit()
