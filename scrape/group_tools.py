@@ -1,5 +1,4 @@
 import time
-from selenium import webdriver
 
 #Application Created Code
 from scrape.system_tools import SystemTools

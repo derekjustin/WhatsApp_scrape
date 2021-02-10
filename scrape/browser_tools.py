@@ -14,13 +14,13 @@ class BrowserTools:
 
       def __init__(self):
            #Setup the selenium drivers
-           system_tools = SystemTools()
+           self.system_tools = SystemTools()
            self.options = webdriver.ChromeOptions()
-           self.options.add_argument("user-data-dir=" + system_tools.get_chrome_config_path() )
-           self.executable_path = system_tools.get_cwd_path() + "/scrape/browser_driver/chromedriver"
+           self.options.add_argument("user-data-dir=" + self.system_tools.get_chrome_config_path())
+           self.executable_path = self.system_tools.get_cwd_path() + "/scrape/browser_driver/chromedriver"
 
       def open_browser(self):
-           self.driver = webdriver.Chrome(executable_path= self.executable_path, chrome_options=self.options)
+           self.driver = webdriver.Chrome(executable_path= self.executable_path, options=self.options)
 
       def check_browser_status(self):
            try:
