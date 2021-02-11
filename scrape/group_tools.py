@@ -24,3 +24,15 @@ class GroupTools:
          self.browser.browser_find_element_by_link_text_with_wait("use WhatsApp Web").click()
          self.browser.browser_find_element_by_xpath_with_wait("//div[text()='Join group']").click()
          time.sleep(3)
+
+     def join_multiple_groups(self):
+         if  self.browser.check_browser_status() == "Alive":
+             pass
+         else:
+             self.browser.open_browser()
+         file_name = input("Please provide name of the file to read group links from inside of 'scrape/group_files/groups_to_join' folder: ")
+         with open("scrape/group_files/groups_to_join" + file_name) as fp:
+             while True:
+                 line = fp.readline()
+                 if not line:
+                     break
