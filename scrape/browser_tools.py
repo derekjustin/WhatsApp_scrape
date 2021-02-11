@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.command import Command
 
+from webdriver_manager.chrome import ChromeDriverManager
+
 #Application Created Code
 from scrape.system_tools import SystemTools
 
@@ -17,10 +19,11 @@ class BrowserTools:
            self.system_tools = SystemTools()
            self.options = webdriver.ChromeOptions()
            self.options.add_argument("user-data-dir=" + self.system_tools.get_chrome_config_path())
-           self.executable_path = self.system_tools.get_cwd_path() + "/scrape/browser_driver/chromedriver"
+           self.executable_path = self.system_tools.get_cwd_path() + "/scrape/browser_driver/chromedriverMac"
 
       def open_browser(self):
-           self.driver = webdriver.Chrome(executable_path= self.executable_path, options=self.options)
+         #  self.driver = webdriver.Chrome(executable_path= self.executable_path, options=self.options)
+           self.driver = webdriver.Chrome(ChromeDriverManager().install())
 
       def check_browser_status(self):
            try:
@@ -58,3 +61,4 @@ class BrowserTools:
       
       def close_browser(self):
            self.driver.quit()
+
