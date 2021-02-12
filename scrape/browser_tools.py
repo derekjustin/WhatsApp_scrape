@@ -19,13 +19,10 @@ class BrowserTools:
            self.system_tools = SystemTools()
            self.options = webdriver.ChromeOptions()
            self.options.add_argument("user-data-dir=" + self.system_tools.get_chrome_config_path())
-       #    self.executable_path = self.system_tools.get_cwd_path() + "/scrape/browser_driver/chromedriver"
-#           self.executable_path = self.system_tools.get_cwd_path() + "/scrape/browser_driver/chromedriver_2"
            self.executable_path = ChromeDriverManager().install()
 
       def open_browser(self):
            self.driver = webdriver.Chrome(executable_path= self.executable_path, options=self.options)
-         #  self.driver = webdriver.Chrome(ChromeDriverManager().install())
 
       def check_browser_status(self):
            try:
