@@ -29,15 +29,12 @@ def test_check_browser_status():
     assert alive_status == "Alive"
     assert browser_tools.check_browser_status() == "Dead"
 
-#TODO: Fix this test. After using the "webdriver_manager" library we are experiencing failures
 def test_browser_find_element_by_xpath_with_wait():
     browser_tools = BrowserTools()
     browser_tools.open_browser()
     browser_tools.go_to_url("https://google.com")
-    #I dont think the test is finding the xpath
     found_element = browser_tools.browser_find_element_by_xpath_with_wait("//input[@value='Google Search']")
     browser_tools.close_browser()
-    #Or its whatever this magic is doing "webdriver.remote.webelement.WebElement"
     assert type(found_element) == webdriver.remote.webelement.WebElement
 
 def test_browser_find_element_by_link_text_with_wait():
