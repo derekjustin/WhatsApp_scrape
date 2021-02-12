@@ -19,11 +19,14 @@ class GroupTools:
          else:
              self.browser.open_browser()
          group_link = input("Please enter a WhatsApp group link: ")
+         self.navigate_join_screens(group_link)
+         """
          self.browser.go_to_url(group_link)     
          self.browser.browser_find_element_by_xpath_with_wait("//a[@title='Follow this link to join']").click()
          self.browser.browser_find_element_by_link_text_with_wait("use WhatsApp Web").click()
          self.browser.browser_find_element_by_xpath_with_wait("//div[text()='Join group']").click()
          time.sleep(3)
+         """
 
      def join_multiple_groups(self):
          if  self.browser.check_browser_status() == "Alive":
