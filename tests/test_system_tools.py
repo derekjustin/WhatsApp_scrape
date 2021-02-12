@@ -1,6 +1,7 @@
 from appdirs import *
 from scrape.system_tools import SystemTools
 import os.path
+import platform
 
 #############
 # Tests the system_tools.py and relative pathing 
@@ -12,19 +13,30 @@ def test_get_cwd_path():
     assert system_tools.get_cwd_path() == os.getcwd()
 
 def test_chrome_config_path():
-    system_tools = SystemTools()
-    app_name     = "google-chrome"
-    app_author   = "Google"
 
+    system_tools = SystemTools()
+
+    if(system_tools.get_sys_platform() == "Darwin"):
+        app_name     = "Google/Chrome"
+        app_author   = "Google"
+    if(system_tools.get_sys_platform() == "Linux"):
+        app_name     = "google-chrome"
+        app_author   = "Google"
     assert system_tools.get_chrome_config_path()  == user_config_dir(app_name , app_author)
 
-def test_driver_dir_exists():
-    system_tools = SystemTools()
-    assert os.path.isdir(system_tools.get_cwd_path() + '/scrape/browser_driver')
+def test_platform():
+    system_tools    = SystemTools()
+    system_platform = system_tools.get_sys_platform()
+    platform_os     = platform.system()
 
-def test_driver_exists():
-    system_tools = SystemTools()
-    assert os.path.isfile(system_tools.get_cwd_path() + '/scrape/browser_driver/chromedriver')
+    assert system_platform == platform_os
+
+
+
+
+
+
+
 
 
 

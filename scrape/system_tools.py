@@ -18,19 +18,20 @@ class SystemTools:
               app_name                = "google-chrome"
               app_author              = "Google"
           elif(self.platform_os != "Linux" or self.platform_os == "Darwin"):
-              print("Could not Find a Usable Operating System, Please Retry or Ubuntu or MacOS")
-              exit()
+              raise Exception("WhatsAppScrape can not read your currrent OS\n" +
+                              "Please ensure you are using MacOS or Ubuntu" )
+
           #Use appdirs library to find the users Chrome Account
           self.config_path         = user_config_dir(app_name , app_author)
           print("Looking for users Google Account account at " + self.config_path ) 
           self.current_working_dir = os.getcwd()
 
      def get_chrome_config_path(self):
-            return self.config_path
+          return self.config_path
 
      def get_cwd_path(self):
           return self.current_working_dir
 
-     def get_sys_platform():
+     def get_sys_platform(self):
           return self.platform_os
 
