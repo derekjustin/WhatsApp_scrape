@@ -13,9 +13,6 @@ def test__init__():
     system_type = SystemTools()
     assert type(browser_tools.system_tools) == type(system_type) 
     assert type(browser_tools.options) == webdriver.chrome.options.Options 
-    assert browser_tools.options.arguments[0] == "user-data-dir=" + browser_tools.system_tools.get_chrome_config_path() 
-    assert browser_tools.executable_path == browser_tools.system_tools.get_cwd_path() + "/scrape/browser_driver/chromedriver"
-    
 
 def test_open_browser():
     browser_tools = BrowserTools()
@@ -36,7 +33,7 @@ def test_browser_find_element_by_xpath_with_wait():
     browser_tools = BrowserTools()
     browser_tools.open_browser()
     browser_tools.go_to_url("https://google.com")
-    found_element = browser_tools.browser_find_element_by_xpath_with_wait("//img[@alt='Google']")
+    found_element = browser_tools.browser_find_element_by_xpath_with_wait("//input[@value='Google Search']")
     browser_tools.close_browser()
     assert type(found_element) == webdriver.remote.webelement.WebElement
 
