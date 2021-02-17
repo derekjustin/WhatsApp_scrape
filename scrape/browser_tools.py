@@ -21,15 +21,15 @@ class BrowserTools:
            self.options.add_argument("user-data-dir=" + self.system_tools.get_chrome_config_path())
            self.executable_path = ChromeDriverManager().install()
 
-      def open_browser(self):
+      def init_browser(self):
            self.driver = webdriver.Chrome(executable_path= self.executable_path, options=self.options)
 
-      def check_browser_status(self):
+      def open_browser(self):
            try:
                 self.driver.execute(Command.STATUS)
-                return "Alive"
            except:
-                return "Dead"
+                return self.init_browser()
+
      
       def browser_find_element_by_xpath_with_wait(self, element_description):
            element = ''
@@ -42,6 +42,18 @@ class BrowserTools:
                 except:
                      continue
            return element
+
+      def browser_find_multiple_elements_by_xpath_with_wait(self, elements_description):
+           elements = ''
+           timeout_counter = 0
+           while not elements and timeout_counter <= 60:
+                timeout_counter += 1
+                time.sleep(2)
+                try:
+                     elements = self.driver.find_elements_by_xpath(elements_description)
+                except:
+                     continue
+           return elements
 
       def browser_find_element_by_link_text_with_wait(self, link_description):
            element = ''

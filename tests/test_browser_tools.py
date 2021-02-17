@@ -1,4 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.remote.command import Command
+import urllib3
+
 
 from scrape.browser_tools import BrowserTools
 from scrape.system_tools import SystemTools
@@ -20,14 +23,6 @@ def test_open_browser():
     browser = browser_tools.driver
     browser_tools.close_browser()
     assert type(browser) ==  webdriver.chrome.webdriver.WebDriver
-
-def test_check_browser_status():
-    browser_tools = BrowserTools()
-    browser_tools.open_browser()
-    alive_status = browser_tools.check_browser_status()
-    browser_tools.close_browser()
-    assert alive_status == "Alive"
-    assert browser_tools.check_browser_status() == "Dead"
 
 def test_browser_find_element_by_xpath_with_wait():
     browser_tools = BrowserTools()
@@ -57,5 +52,10 @@ def test_close_browser():
     browser_tools = BrowserTools()
     browser_tools.open_browser()
     browser_tools.close_browser()
-    assert browser_tools.check_browser_status() == "Dead"
+    try:
+        assert browser_tools.driver.execute(Command.STATUS) == True
+        return True
+    except:
+        return False
 
+        
