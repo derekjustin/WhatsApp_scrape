@@ -4,4 +4,4 @@ scrape.egg-info/
 scrape/__pycache__/
 tests/__pycache__/
 activate
-scrape/group_files/raw_html_files/
+scrape/group_files/raw_html_files/*
