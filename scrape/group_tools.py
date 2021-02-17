@@ -54,7 +54,7 @@ class GroupTools:
          try:
              self.browser.open_browser()
              self.browser.go_to_url("https://web.whatsapp.com/")
-             self.__get_group_list()
+             self.get_group_list()
          except:
              print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
              self.browser.close_browser()
@@ -70,7 +70,7 @@ class GroupTools:
          try:
              self.browser.open_browser()
              self.browser.go_to_url("https://web.whatsapp.com/")
-             self.__get_group_list()
+             self.get_group_list()
          except:
              print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
              self.browser.close_browser()
@@ -81,15 +81,16 @@ class GroupTools:
          print(70 * '#')
          self.browser.close_browser()
 
-
-######################## PRIVATE FUNCTIONS ##############################
-     def __get_group_list(self):
+     def get_group_list(self):
          self.group_list = []
          self.group_elements = self.browser.browser_find_multiple_elements_by_xpath_with_wait("//span[@class='_1hI5g _1XH7x _1VzZY']")
          for element in self.group_elements:
              if element.get_attribute("title") != '':
                  self.group_list.append(element.text)
          return self.group_list
+
+
+######################## PRIVATE FUNCTIONS ##############################
 
      def __get_raw_html(self, group):
          self.browser.browser_find_element_by_xpath_with_wait("//span[text()='" + group + "']").click()
