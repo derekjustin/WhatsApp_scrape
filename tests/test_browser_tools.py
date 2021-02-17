@@ -30,36 +30,40 @@ def test_open_browser():
 
 def test_browser_find_element_by_xpath_with_wait():
     browser_tools = BrowserTools()
+    current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
-    browser_tools.go_to_url("https://google.com")
-    found_element = browser_tools.browser_find_element_by_xpath_with_wait("//input[@value='Google Search']")
+    browser_tools.go_to_url("file://" + current_path + "/tests/test_webpages/WhatsApp Group Invite.html")
+    found_element = browser_tools.browser_find_element_by_xpath_with_wait("//h2[@class='_2yzk']").text
     browser_tools.close_browser()
-    assert type(found_element) == webdriver.remote.webelement.WebElement
+    assert found_element == "Civil engineering videos1"
 
 def test_browser_find_multiple_elements_by_xpath_with_wait():
     browser_tools = BrowserTools()
+    current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
-    browser_tools.go_to_url("https://google.com")
-    found_elements = browser_tools.browser_find_multiple_elements_by_xpath_with_wait("//a[@class='MV3Tnb']")
+    browser_tools.go_to_url("file://" + current_path + "/tests/test_webpages/WhatsApp Group Invite.html")
+    found_elements = browser_tools.browser_find_multiple_elements_by_xpath_with_wait("//a[@class='_36or']")
     browser_tools.close_browser()
-    assert len(found_elements) == 2
+    assert len(found_elements) == 7
 
 
 def test_browser_find_element_by_link_text_with_wait():
     browser_tools = BrowserTools()
+    current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
-    browser_tools.go_to_url("https://google.com")
-    found_element = browser_tools.browser_find_element_by_link_text_with_wait("About")
+    browser_tools.go_to_url("file://" + current_path + "/tests/test_webpages/WhatsApp Group Invite.html")
+    found_element = browser_tools.browser_find_element_by_link_text_with_wait("WhatsApp Web").text
     browser_tools.close_browser()
-    assert type(found_element) == webdriver.remote.webelement.WebElement
+    assert found_element == "WhatsApp Web"
 
 def test_browser_go_to_url():
     browser_tools = BrowserTools()
+    current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
-    browser_tools.go_to_url("https://www.google.com/")
+    browser_tools.go_to_url("file://" + current_path + "/tests/test_webpages/WhatsApp Group Invite.html")
     current_url = browser_tools.driver.current_url
     browser_tools.close_browser()
-    assert current_url == "https://www.google.com/"
+    assert current_url == "file://" + current_path + "/tests/test_webpages/WhatsApp%20Group%20Invite.html"
 
 def test_close_browser():
     browser_tools = BrowserTools()
