@@ -1,0 +1,7 @@
+Join a group
+Join groups
+list groups of account
+retrieve messages from specific group (save page html and give to scrap tools bsoup)
+retrieve messages from all groups (save page html and give to scrap tools bsoup)
+(selenium to scroll to timestamp)
+(use backup feature of whatsapp into google drive)

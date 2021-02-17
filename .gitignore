@@ -1,0 +1,7 @@
+#These dirs/files are generated from the venv or "python setup.py develop"
+WhatsApp_scrape-venv/
+scrape.egg-info/
+scrape/__pycache__/
+tests/__pycache__/
+activate
+scrape/group_files/raw_html_files/*
