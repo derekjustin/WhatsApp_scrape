@@ -1,11 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.remote.command import Command
-import urllib3
 
-
+#### Application Code ###########
 from scrape.browser_tools import BrowserTools
 from scrape.system_tools import SystemTools
-
 
 #############
 # Tests browser_tools.py
@@ -72,5 +70,3 @@ def test_close_browser():
         return True
     except:
         return False
-
-        

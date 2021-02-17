@@ -3,7 +3,6 @@ import os.path
 import datetime
 
 #Application Created Code
-from scrape.system_tools import SystemTools
 from scrape.browser_tools import BrowserTools
 
 class GroupTools:
@@ -88,7 +87,6 @@ class GroupTools:
              if element.get_attribute("title") != '':
                  self.group_list.append(element.text)
          return self.group_list
-
 
 ######################## PRIVATE FUNCTIONS ##############################
 
