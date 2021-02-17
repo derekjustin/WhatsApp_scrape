@@ -43,6 +43,18 @@ class BrowserTools:
                      continue
            return element
 
+      def browser_find_multiple_elements_by_xpath_with_wait(self, elements_description):
+           elements = ''
+           timeout_counter = 0
+           while not elements and timeout_counter <= 60:
+                timeout_counter += 1
+                time.sleep(2)
+                try:
+                     elements = self.driver.find_elements_by_xpath(elements_description)
+                except:
+                     continue
+           return elements
+
       def browser_find_element_by_link_text_with_wait(self, link_description):
            element = ''
            timeout_counter = 0
