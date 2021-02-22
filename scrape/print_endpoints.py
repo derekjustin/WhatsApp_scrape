@@ -9,4 +9,5 @@ def print_endpoints():
           "below to start scraping!\n" +
           80 * '#' + "\n\n" +
           "\tgroup_tools\n\t\tdescription: Open GroupTools menu\n\n" +
+          "\twhats_scrape_GUI\n\t\tdescription: Opens the applicaiton GUI\n\n" +
           "\tdeactivate\n\t\tdescription: Close the python virtual environment\n\n")
