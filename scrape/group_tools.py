@@ -3,7 +3,6 @@ import os.path
 import datetime
 
 #Application Created Code
-from scrape.system_tools import SystemTools
 from scrape.browser_tools import BrowserTools
 
 class GroupTools:
@@ -62,8 +61,23 @@ class GroupTools:
          for group in self.group_list:
              html = self.__get_raw_html(group)
              time = datetime.datetime.now()
-             self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d"), html)
+             self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
          print("All group data has been saved SUCCESSFULLY.")
+         self.browser.close_browser()
+
+     def save_single_groups_data(self):
+         try:
+             group = input("\nPlease Enter A Group Name: ")
+             self.browser.open_browser()
+             self.browser.go_to_url("https://web.whatsapp.com/")
+         except:
+             print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
+             self.browser.close_browser()
+             return
+         html = self.__get_raw_html(group)
+         time = datetime.datetime.now()
+         self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
+         print("Group data has been saved SUCCESSFULLY.")
          self.browser.close_browser()
 
      def print_groups(self):
@@ -89,7 +103,6 @@ class GroupTools:
                  self.group_list.append(element.text)
          return self.group_list
 
-
 ######################## PRIVATE FUNCTIONS ##############################
 
      def __get_raw_html(self, group):
@@ -98,7 +111,7 @@ class GroupTools:
          return self.browser.driver.page_source
 
      def __write_group_data_to_html_file(self, group, time, html):
-         fp = open("scrape/group_files/raw_html_files/" + time + group, "w")
+         fp = open("scrape/group_files/raw_html_files/" + time + "_" + group, "w")
          fp.write(html)
          fp.close()
 
