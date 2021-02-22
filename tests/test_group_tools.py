@@ -9,7 +9,7 @@ from scrape.group_tools import BrowserTools
 # Tests group_tools.py
 #############
 
-test_page = ("file://" + os.getcwd() + "/tests/test_webpages/(1) WhatsApp.html")
+test_page = ("file://" + os.getcwd() + "/tests/test_webpages/mock_WhatsApp.html")
 
 def test__init__():
     group_tools = GroupTools()
