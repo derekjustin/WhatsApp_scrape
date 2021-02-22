@@ -8,6 +8,12 @@ pip install -r requirements.txt
 python setup.py develop
 
 echo "####################################\n"
+echo "        RUNNING STYLE GUIDE\n"
+echo "####################################\n"
+
+pep8 --show-source --show-pep8 --ignore=E501 scrape/
+
+echo "####################################\n"
 echo "        RUNNING PYTHON TESTS\n"
 echo "####################################\n"
 # Run tests!
