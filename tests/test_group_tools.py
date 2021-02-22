@@ -1,7 +1,7 @@
 from io import StringIO
 import os.path
 
-#### Application Code ###########
+# Application Created Code
 from scrape.group_tools import GroupTools
 from scrape.group_tools import BrowserTools
 
@@ -10,6 +10,7 @@ from scrape.group_tools import BrowserTools
 #############
 
 test_page = ("file://" + os.getcwd() + "/tests/test_webpages/mock_WhatsApp.html")
+
 
 def test__init__():
     group_tools = GroupTools()
@@ -23,9 +24,8 @@ def test_join_group(monkeypatch):
     group_tools = GroupTools()
     monkeypatch.setattr('sys.stdin', test_page)
     group_tools.join_group()
-
-    #href="https://chat.whatsapp.com/invite/El9vG0AQn1AAXPsG73ueTI" 
 """
+
 
 def test_get_group_list():
     group_tools = GroupTools()
