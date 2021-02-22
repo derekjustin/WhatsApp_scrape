@@ -34,7 +34,6 @@ def test_open_browser():
 
 def test_browser_find_element_by_xpath_with_wait():
     browser_tools = BrowserTools()
-    #current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
     browser_tools.go_to_url(test_page)
     found_element = browser_tools.browser_find_element_by_xpath_with_wait("//h2[@class='_2yzk']").text
@@ -43,7 +42,6 @@ def test_browser_find_element_by_xpath_with_wait():
 
 def test_browser_find_multiple_elements_by_xpath_with_wait():
     browser_tools = BrowserTools()
-    #current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
     browser_tools.go_to_url(test_page)
     found_elements = browser_tools.browser_find_multiple_elements_by_xpath_with_wait("//a[@class='_36or']")
@@ -53,7 +51,6 @@ def test_browser_find_multiple_elements_by_xpath_with_wait():
 
 def test_browser_find_element_by_link_text_with_wait():
     browser_tools = BrowserTools()
-    #current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
     browser_tools.go_to_url(test_page)
     found_element = browser_tools.browser_find_element_by_link_text_with_wait("WhatsApp Web").text
@@ -62,7 +59,6 @@ def test_browser_find_element_by_link_text_with_wait():
 
 def test_browser_go_to_url():
     browser_tools = BrowserTools()
-    #current_path = browser_tools.system_tools.get_cwd_path()
     browser_tools.open_browser()
     browser_tools.go_to_url(test_page)
     current_url = browser_tools.driver.current_url
