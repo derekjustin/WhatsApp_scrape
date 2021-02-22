@@ -17,3 +17,4 @@ selenium==3.141.0
 toml==0.10.2
 urllib3==1.26.3
 webdriver-manager==3.3.0
+pep8==1.7.1
