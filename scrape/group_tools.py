@@ -52,13 +52,11 @@ class GroupTools:
 
     def save_all_groups_data(self):
         try:
-            self.browser.open_browser()
-            self.browser.go_to_url("https://web.whatsapp.com/")
             self.get_group_list()
         except:
-            print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
-            self.browser.close_browser()
             return
+        self.browser.open_browser()
+        self.browser.go_to_url("https://web.whatsapp.com/")
         for group in self.group_list:
             html = self.__get_raw_html(group)
             time = datetime.datetime.now()
@@ -83,25 +81,28 @@ class GroupTools:
 
     def print_groups(self):
         try:
-            self.browser.open_browser()
-            self.browser.go_to_url("https://web.whatsapp.com/")
             self.get_group_list()
         except:
-            print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
-            self.browser.close_browser()
             return
         print(30 * '#' + " GROUP LIST " + 30 * '#')
         for group in self.group_list:
             print(group)
         print(70 * '#')
-        self.browser.close_browser()
 
     def get_group_list(self):
-        self.group_list = []
-        self.group_elements = self.browser.browser_find_multiple_elements_by_xpath_with_wait("//span[@class='_1hI5g _1XH7x _1VzZY']")
+        try:
+            self.group_list = []
+            self.browser.open_browser()
+            self.browser.go_to_url("https://web.whatsapp.com/")
+            self.group_elements = self.browser.browser_find_multiple_elements_by_xpath_with_wait("//span[@class='_1hI5g _1XH7x _1VzZY']")
+        except:
+            self.browser.close_browser()
+            print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
+            return
         for element in self.group_elements:
             if element.get_attribute("title") != '':
                 self.group_list.append(element.text)
+        self.browser.close_browser()
         return self.group_list
 
 # **********************PRIVATE FUNCTIONS **************************************
