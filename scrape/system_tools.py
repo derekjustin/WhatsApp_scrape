@@ -1,6 +1,8 @@
 from appdirs import *
 import platform
-import os, re, os.path
+import os
+import re
+
 
 class SystemTools:
     #############
@@ -47,7 +49,7 @@ class SystemTools:
             for file in files:
                 os.remove(os.path.join(root, file))
 
-    def clean_processed_pickle_dir(self):        
+    def clean_processed_pickle_dir(self):
         if not os.path.isdir(self.get_processed_html_pickles_dir()):
             os.mkdir(self.get_processed_html_pickles_dir())
         else:
