@@ -20,8 +20,7 @@ class SystemTools:
             raise Exception("WhatsAppScrape can not read your currrent OS\nPlease ensure you are using MacOS or Ubuntu")
     # Use appdirs library to find the users Chrome Account
         self.config_path = user_config_dir(app_name, app_author)
-        print("Looking for users Google Account account at " + self.config_path)
-        self.current_working_dir = os.getcwd()
+        self.current_working_dir = os.getcwd() + "/scrape"
 
     def get_chrome_config_path(self):
         return self.config_path
