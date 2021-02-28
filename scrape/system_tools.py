@@ -18,7 +18,7 @@ class SystemTools:
             app_author = "Google"
         elif(self.platform_os != "Linux" or self.platform_os == "Darwin"):
             raise Exception("WhatsAppScrape can not read your currrent OS\nPlease ensure you are using MacOS or Ubuntu")
-    # Use appdirs library to find the users Chrome Account
+        # Use appdirs library to find the users Chrome Account
         self.config_path = user_config_dir(app_name, app_author)
         self.current_working_dir = os.getcwd() + "/scrape"
 
