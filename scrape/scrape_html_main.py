@@ -12,6 +12,7 @@ def main():
         print("")
         if user_input == ("scrape_html_messages"):
             scrape_html.process_all_raw_html_to_pickles()
+            print( "\n\n\n *****Scraped messages saved to*****\n" + system_tools.get_processed_html_pickles_dir() )
         elif user_input == ("back"):
             break
         else:
