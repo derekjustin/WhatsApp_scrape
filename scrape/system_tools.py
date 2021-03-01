@@ -22,26 +22,26 @@ class SystemTools:
             raise Exception("WhatsAppScrape can not read your currrent OS\nPlease ensure you are using MacOS or Ubuntu")
         # Use appdirs library to find the users Chrome Account
         self.config_path = user_config_dir(app_name, app_author)
-        self.current_working_dir = os.getcwd() + "/scrape"
+        self.current_working_dir = self.get_cwd_path()
 
     def get_chrome_config_path(self):
         return self.config_path
 
     def get_cwd_path(self):
-        return self.current_working_dir
+        return os.getcwd()
 
     def get_sys_platform(self):
         return self.platform_os
 
     def get_html_dir_path(self):
-        return self.get_cwd_path() + '/group_files/raw_html_files'
+        return self.get_cwd_path() + '/scrape/group_files/raw_html_files'
 
     def get_raw_html_list(self):
         html_dir = self.get_html_dir_path()
         return os.listdir(html_dir)
 
     def get_processed_html_pickles_dir(self):
-        return self.get_cwd_path() + '/group_files/processed_html_pickles'
+        return self.get_cwd_path() + '/scrape/group_files/processed_html_pickles'
 
     def delete_all_files_in_dir(self, myfolder):
         mypath = myfolder

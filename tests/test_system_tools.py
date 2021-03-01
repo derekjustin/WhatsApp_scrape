@@ -11,7 +11,7 @@ import platform
 
 def test_get_cwd_path():
     system_tools = SystemTools()
-    assert system_tools.get_cwd_path() == os.getcwd() + "/scrape"
+    assert system_tools.get_cwd_path() == os.getcwd() 
 
 
 def test_chrome_config_path():
