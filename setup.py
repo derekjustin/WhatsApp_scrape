@@ -14,7 +14,7 @@ setuptools.setup(
     tests_require=[],
     entry_points={
         'console_scripts': [
-            'group_tools = scrape.group_tools_main:main', 'whats_scrape_GUI = scrape.whats_scrape_GUI_main:main'
+            'group_tools = scrape.group_tools_main:main', 'whats_scrape_GUI = scrape.whats_scrape_GUI_main:main', 'scrape_tools = scrape.scrape_html_main:main'
         ],
     },
 )
