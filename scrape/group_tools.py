@@ -1,6 +1,7 @@
 import time
 import os.path
 import datetime
+import os
 
 # Application Created Code
 from scrape.browser_tools import BrowserTools
@@ -27,6 +28,13 @@ class GroupTools:
         self.browser.close_browser()
 
     def join_multiple_groups(self):
+        try:
+            if not os.path.exists('scrape/group_files/groups_to_join'):
+                os.makedirs('scrape/group_files/groups_to_join')
+            if not os.path.exists('scrape/group_files/groups_failed'):
+                os.makedirs('scrape/group_files/groups_failed')
+        except:
+            return
         while True:
             file_name = input("Please provide name of the file to read group links from inside of the\n"
                               "'scrape/group_files/groups_to_join' folder or 'back' to return to group_tools menu: ")
@@ -38,7 +46,7 @@ class GroupTools:
                 print("FILE DOES NOT EXIST")
         self.browser.open_browser()
         with open("scrape/group_files/groups_to_join/" + file_name, 'r') as input_group_file:
-            failed_group_file = open("scrape/group_files/groups_failed/" + file_name, 'w')
+            failed_group_file = open("scrape/group_files/groups_failed/" + file_name, 'w+')
             while True:
                 group_link = input_group_file.readline()
                 if not group_link:
@@ -52,13 +60,13 @@ class GroupTools:
 
     def save_all_groups_data(self):
         try:
-            self.browser.open_browser()
-            self.browser.go_to_url("https://web.whatsapp.com/")
             self.get_group_list()
+            if not os.path.exists('scrape/group_files/raw_html_files'):
+                os.makedirs('scrape/group_files/raw_html_files')
         except:
-            print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
-            self.browser.close_browser()
             return
+        self.browser.open_browser()
+        self.browser.go_to_url("https://web.whatsapp.com/")
         for group in self.group_list:
             html = self.__get_raw_html(group)
             time = datetime.datetime.now()
@@ -69,6 +77,8 @@ class GroupTools:
     def save_single_groups_data(self):
         try:
             group = input("\nPlease Enter A Group Name: ")
+            if not os.path.exists('scrape/group_files/raw_html_files'):
+                os.makedirs('scrape/group_files/raw_html_files')
             self.browser.open_browser()
             self.browser.go_to_url("https://web.whatsapp.com/")
         except:
@@ -83,25 +93,28 @@ class GroupTools:
 
     def print_groups(self):
         try:
-            self.browser.open_browser()
-            self.browser.go_to_url("https://web.whatsapp.com/")
             self.get_group_list()
         except:
-            print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
-            self.browser.close_browser()
             return
         print(30 * '#' + " GROUP LIST " + 30 * '#')
         for group in self.group_list:
             print(group)
         print(70 * '#')
-        self.browser.close_browser()
 
-    def get_group_list(self):
-        self.group_list = []
-        self.group_elements = self.browser.browser_find_multiple_elements_by_xpath_with_wait("//span[@class='_1hI5g _1XH7x _1VzZY']")
+    def get_group_list(self, url="https://web.whatsapp.com/"):
+        try:
+            self.group_list = []
+            self.browser.open_browser()
+            self.browser.go_to_url(url)
+            self.group_elements = self.browser.browser_find_multiple_elements_by_xpath_with_wait("//span[@class='_35k-1 _1adfa _3-8er']")
+        except:
+            self.browser.close_browser()
+            print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
+            return
         for element in self.group_elements:
             if element.get_attribute("title") != '':
                 self.group_list.append(element.text)
+        self.browser.close_browser()
         return self.group_list
 
 # **********************PRIVATE FUNCTIONS **************************************
@@ -112,7 +125,7 @@ class GroupTools:
         return self.browser.driver.page_source
 
     def __write_group_data_to_html_file(self, group, time, html):
-        fp = open("scrape/group_files/raw_html_files/" + time + "_" + group, "w")
+        fp = open("scrape/group_files/raw_html_files/" + time + "_" + group, "w+")
         fp.write(html)
         fp.close()
 
