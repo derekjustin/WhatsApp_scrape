@@ -14,9 +14,9 @@ def main():
                            "back: return to main menu\n\nUSER INPUT: ")
         print("")
         if user_input == ("join_group"):
-            tool.join_group()
+            tool.join_group_cli()
         elif user_input == ("join_multiple_groups"):
-            tool.join_multiple_groups()
+            tool.join_multiple_groups_cli()
         elif user_input == ("single_group_data"):
             tool.save_single_groups_data()
         elif user_input == ("all_groups_data"):
