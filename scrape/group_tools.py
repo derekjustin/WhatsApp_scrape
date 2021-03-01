@@ -89,11 +89,11 @@ class GroupTools:
             print(group)
         print(70 * '#')
 
-    def get_group_list(self):
+    def get_group_list(self, url="https://web.whatsapp.com/"):
         try:
             self.group_list = []
             self.browser.open_browser()
-            self.browser.go_to_url("https://web.whatsapp.com/")
+            self.browser.go_to_url(url)
             self.group_elements = self.browser.browser_find_multiple_elements_by_xpath_with_wait("//span[@class='_1hI5g _1XH7x _1VzZY']")
         except:
             self.browser.close_browser()

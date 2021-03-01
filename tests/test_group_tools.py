@@ -29,7 +29,7 @@ def test_join_group(monkeypatch):
 
 def test_get_group_list():
     group_tools = GroupTools()
-    group_tools.browser.open_browser()
-    group_tools.browser.go_to_url(test_page)
-    assert len(group_tools.get_group_list()) == 16
+    #group_tools.browser.open_browser()
+    #group_tools.browser.go_to_url(test_page)
+    assert len(group_tools.get_group_list(test_page)) == 16
     group_tools.browser.close_browser()
