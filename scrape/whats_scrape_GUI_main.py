@@ -7,7 +7,6 @@ def main():
     gui = WhatsScrapeGUI()
     group_tools = GroupTools()
 
-
     while True:
         window = gui.make_home_menu()
         event, values = window.read()

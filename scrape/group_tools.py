@@ -90,7 +90,6 @@ class GroupTools:
             return False
         # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
 
-
     def save_all_groups_data(self):
         try:
             self.get_group_list()
