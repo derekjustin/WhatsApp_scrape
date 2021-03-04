@@ -18,7 +18,7 @@ class GroupTools:
         self.group_elements = []
         self.group_list = []
 
-    def join_group(self):
+    def join_group_cli(self):
         group_link = input("Please enter a WhatsApp group link or 'back to return to group_tools menu: ")
         if group_link == 'back':
             return
@@ -27,7 +27,13 @@ class GroupTools:
             print("\n\nFailed to join group: " + group_link + "\nCheck to make sure the link is valid.")
         self.browser.close_browser()
 
-    def join_multiple_groups(self):
+    def join_group_gui(self, group_link):
+        self.browser.open_browser()
+        success = self.__navigate_join_screens_and_return_success(group_link)
+        self.browser.close_browser()
+        return success
+
+    def join_multiple_groups_cli(self):
         try:
             if not os.path.exists('scrape/group_files/groups_to_join'):
                 os.makedirs('scrape/group_files/groups_to_join')
@@ -56,6 +62,32 @@ class GroupTools:
         failed_group_file.close()
         input_group_file.close()
         self.browser.close_browser()
+        # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
+
+    def join_multiple_groups_gui(self, file_name):
+        try:
+            if not os.path.exists('scrape/group_files/groups_to_join'):
+                os.makedirs('scrape/group_files/groups_to_join')
+            if not os.path.exists('scrape/group_files/groups_failed'):
+                os.makedirs('scrape/group_files/groups_failed')
+        except:
+            return False
+        if os.path.isfile("scrape/group_files/groups_to_join/" + file_name):
+            self.browser.open_browser()
+            with open("scrape/group_files/groups_to_join/" + file_name, 'r') as input_group_file:
+                failed_group_file = open("scrape/group_files/groups_failed/" + file_name, 'w+')
+                while True:
+                    group_link = input_group_file.readline()
+                    if not group_link:
+                        break
+                    if self.__navigate_join_screens_and_return_success(group_link) is not True:
+                        failed_group_file.write(group_link)
+            failed_group_file.close()
+            input_group_file.close()
+            self.browser.close_browser()
+            return True
+        else:
+            return False
         # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
 
     def save_all_groups_data(self):
