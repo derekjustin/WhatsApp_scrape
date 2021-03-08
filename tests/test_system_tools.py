@@ -72,6 +72,6 @@ def test_get_processed_html_pickles_dir():
 def test_get_os_platform():
     system_tools = SystemTools()
     platform_system = system_tools.get_os_platform()
-    if platform_system != 'Darwin' and  platform_system != 'Linux':
-       assert False
+    if platform_system != 'Darwin' and platform_system != 'Linux':
+        assert False
     assert True

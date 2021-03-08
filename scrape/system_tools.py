@@ -8,9 +8,8 @@ class SystemTools:
     #############
     # Class to manage file pathing for cross platforms
     #############
-    def __init__(self, platform_system = platform.system()):
+    def __init__(self, platform_system=platform.system()):
         # Get the OS
-        #self.platform_os = platform.system()
         self.platform_os = platform_system
         print(self.platform_os)
         # Find where Chrome stores the users Google Account on a given OS

@@ -50,16 +50,14 @@ class WhatsAppHtmlParser:
 
 class MultiProcessHtml:
     sys_tools = SystemTools()
-    def process_all_raw_html_to_pickles(self, raw_html_list= sys_tools.get_raw_html_list(),
-                                              html_pickle_dir= sys_tools.get_processed_html_pickles_dir(),
-                                              html_dir_path= sys_tools.get_html_dir_path() ):
+
+    def process_all_raw_html_to_pickles(self, raw_html_list=sys_tools.get_raw_html_list(), html_pickle_dir=sys_tools.get_processed_html_pickles_dir(), html_dir_path=sys_tools.get_html_dir_path()):
         if not os.path.isdir(html_pickle_dir):
-             os.mkdir(html_pickle_dir)
+            os.mkdir(html_pickle_dir)
         else:
-             for root, dirs, files in os.walk(html_pickle_dir):
-                 for file in files:
-                     os.remove(os.path.join(root, file))
-        #Check if there are any html files to process
+            for root, dirs, files in os.walk(html_pickle_dir):
+                for file in files:
+                    os.remove(os.path.join(root, file))
         if raw_html_list != []:
             for html_file in raw_html_list:
                 html_parser = WhatsAppHtmlParser(html_dir_path + '/' + html_file)
