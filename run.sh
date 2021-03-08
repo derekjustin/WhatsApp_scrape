@@ -17,7 +17,6 @@ echo "####################################\n"
 echo "        RUNNING PYTHON TESTS\n"
 echo "####################################\n"
 # Run tests!
-py.test
 coverage erase
 coverage run --source=scrape -m py.test
 coverage report -m
