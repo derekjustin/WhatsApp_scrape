@@ -69,36 +69,6 @@ def test_get_processed_html_pickles_dir():
     assert system_processed_html_pickles_dir == processed_html_dir_path
 
 
-def test_delete_all_files_in_dir():
-    testing_dir = os.getcwd() + '/tests/test_delete'
-    file = open(testing_dir + "/test.txt", "w")
-    file.write("This is a test")
-    file.close()
-    assert os.path.exists(testing_dir + "/test.txt")
-    system_tools = SystemTools()
-    system_tools.delete_all_files_in_dir(testing_dir) 
-    assert os.path.isfile(testing_dir + "/test.txt") == False
-
-
-def test_dne_dir_clean_processed_pickle_dir():
-    if os.path.isdir(os.getcwd() + '/scrape/group_files/processed_html_pickles'):
-        os.rmdir( os.getcwd() + '/scrape/group_files/processed_html_pickles' )
-    system_tools = SystemTools()
-    system_tools.clean_processed_pickle_dir()
-    assert os.path.isdir(os.getcwd() + '/scrape/group_files/processed_html_pickles')
-
-
-def test_exists_dir_clean_processed_pickle_dir():
-    if not os.path.isdir(os.getcwd() + '/scrape/group_files/processed_html_pickles'):
-        os.mkdir(os.getcwd() + '/scrape/group_files/processed_html_pickles')
-    file = open(os.getcwd() + '/scrape/group_files/processed_html_pickles/test.txt', 'w')
-    file.write("This is a test")
-    file.close()
-    system_tools = SystemTools()
-    system_tools.clean_processed_pickle_dir()
-    assert os.path.isfile(os.getcwd() + '/scrape/group_files/processed_html_pickles/test.txt') == False
-
-
 def test_get_os_platform():
     system_tools = SystemTools()
     platform_system = system_tools.get_os_platform()

@@ -28,13 +28,12 @@ def test_init_browser():
     assert type(browser_tools.driver) == webdriver.chrome.webdriver.WebDriver
 
 
-#This test sometimes works and sometimes does not.  very inconsistent I want to remove it
-#def test_open_browser():
-#    browser_tools = BrowserTools()
-#    browser_tools.open_browser()
-#    url = browser_tools.driver.current_url
-#    browser_tools.close_browser()
-#    assert url == "chrome://new-tab-page/"
+def test_open_browser():
+    browser_tools = BrowserTools()
+    browser_tools.open_browser()
+    url = browser_tools.driver.current_url
+    browser_tools.close_browser()
+    assert url == "chrome://new-tab-page/"
 
 
 def test_browser_find_element_by_xpath_with_wait():

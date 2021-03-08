@@ -1,10 +1,11 @@
 from scrape.scrape_html import WhatsAppHtmlParser, MultiProcessHtml
-import os.path
+import os
 import platform
 import pytest
 from bs4 import BeautifulSoup
 import pandas as pd
 import datetime
+import shutil
 
 
 def test_parser_object():
@@ -48,11 +49,30 @@ def test_get_messages_pd_frame():
     assert message_frame.index.values[1] == df.index.values[1]
 
 
+def test_MultiprocessHtml_process_all_raw_html_to_pickles():
+    multi_process_html = MultiProcessHtml()
+    test_html_dir = os.getcwd() + '/tests/test_html_parser/test_raw_html'
+    multi_process_html.process_all_raw_html_to_pickles( raw_html_list = os.listdir(test_html_dir),
+                                                        html_pickle_dir= os.getcwd() + '/tests/test_html_parser/test_pickle_output',
+                                                        html_dir_path= test_html_dir )
+    assert os.listdir(os.getcwd() + '/tests/test_html_parser/test_pickle_output') != []
 
 
+def test_MultiprocessHtml_process_all_raw_html_to_picklesi_mkdir():
+    dne_dir = os.getcwd() + '/tests/test_html_parser/test_dne_dir'
+    test_html_dir = os.getcwd() + '/tests/test_html_parser/test_raw_html'
+    if os.path.isdir(dne_dir):
+        shutil.rmtree(dne_dir)
+
+    multi_process_html = MultiProcessHtml()
+    multi_process_html.process_all_raw_html_to_pickles( html_pickle_dir= dne_dir,
+                                                        raw_html_list = os.listdir(test_html_dir),
+                                                        html_dir_path= test_html_dir )
+    assert os.listdir(dne_dir) != []
 
 
+def test_MultiprocessHtml_process_all_raw_html_to_pickles_exception():
 
-
-
-
+    multi_process_html = MultiProcessHtml()
+    with pytest.raises(Exception):
+        multi_process_html.process_all_raw_html_to_pickles(raw_html_list = [])
