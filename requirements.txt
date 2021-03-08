@@ -16,6 +16,7 @@ pandas==1.2.2
 pep8==1.7.1
 pluggy==0.13.1
 py==1.10.0
+pycodestyle==2.6.0
 pyparsing==2.4.7
 PySimpleGUI==4.34.0
 pytest==6.2.2
