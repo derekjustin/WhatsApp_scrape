@@ -173,7 +173,7 @@ class GroupTools:
             self.browser.browser_find_element_by_xpath_with_wait("//div[text()='Join group']").click()
         except:
             pass
-        if group_name == self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group_name + "']").text:
+        if group_name == self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group_name + "']").get_attribute("title"):
             return True
         else:
             return False
