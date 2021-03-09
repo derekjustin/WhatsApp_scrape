@@ -105,9 +105,10 @@ class GroupTools:
         self.browser.go_to_url("https://web.whatsapp.com/")
         for group in self.group_list:
             html = self.__get_raw_html(group)
-            time = datetime.datetime.now()
-            self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
+            timestamp = datetime.datetime.now()
+            self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html)
             self.__remove_group_old_html(group)
+        time.sleep(3)
         self.scraper.process_all_raw_html_to_pickles()
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
@@ -126,6 +127,7 @@ class GroupTools:
         html = self.__get_raw_html(group)
         time = datetime.datetime.now()
         self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
+        self.__remove_group_old_html(group)
         self.scraper.process_all_raw_html_to_pickles()
         print("Group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
@@ -186,5 +188,15 @@ class GroupTools:
             return False
 
     def __remove_group_old_html(self, group):
-        found_files = glob.glob(self.browser.system_tools.get_html_dir_path() + '*_' + group)
-        print(self.browser.system_tools.get_html_dir_path() + '*_' + group)
+        found_files = glob.glob(self.browser.system_tools.get_html_dir_path() + "/*_" + group)
+        newest_html_file = ''
+        for file in found_files:
+            if file > newest_html_file:
+                newest_html_file = file
+            else:
+                continue
+        for file in found_files:
+            if file == newest_html_file:
+                continue
+            else:
+                os.remove(file)
