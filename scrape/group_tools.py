@@ -71,7 +71,7 @@ class GroupTools:
         self.browser.close_browser()
         # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
 
-    def join_multiple_groups_gui(self, file_name):
+    def join_multiple_groups_gui(self, file_name, timeout=60):
         try:
             if not os.path.exists('scrape/group_files/groups_to_join'):
                 os.makedirs('scrape/group_files/groups_to_join')
@@ -87,7 +87,7 @@ class GroupTools:
                     group_link = input_group_file.readline()
                     if not group_link:
                         break
-                    if self.__navigate_join_screens_and_return_success(group_link) is not True:
+                    if self.__navigate_join_screens_and_return_success(group_link, timeout) is not True:
                         failed_group_file.write(group_link)
             failed_group_file.close()
             input_group_file.close()
@@ -97,15 +97,15 @@ class GroupTools:
             return False
         # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
 
-    def save_all_groups_data(self):
+    def save_all_groups_data(self, url="https://web.whatsapp.com/"):
         try:
-            self.get_group_list()
+            self.get_group_list(url)
             if not os.path.exists('scrape/group_files/raw_html_files'):
                 os.makedirs('scrape/group_files/raw_html_files')
         except Exception:
             return
         self.browser.open_browser()
-        self.browser.go_to_url("https://web.whatsapp.com/")
+        self.browser.go_to_url(url)
         for group in self.group_list:
             html = self.__get_raw_html(group)
             timestamp = datetime.datetime.now()
@@ -115,13 +115,13 @@ class GroupTools:
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
 
-    def save_single_groups_data(self):
+    def save_single_groups_data(self, url="https://web.whatsapp.com/"):
         try:
             group = input("\nPlease Enter A Group Name: ")
             if not os.path.exists('scrape/group_files/raw_html_files'):
                 os.makedirs('scrape/group_files/raw_html_files')
             self.browser.open_browser()
-            self.browser.go_to_url("https://web.whatsapp.com/")
+            self.browser.go_to_url(url)
         except Exception:
             print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
             self.browser.close_browser()
@@ -130,19 +130,20 @@ class GroupTools:
         time = datetime.datetime.now()
         self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
         self.__remove_group_old_html(group)
-        self.scraper.process_all_raw_html_to_pickles()
+        # self.scraper.process_all_raw_html_to_pickles()
         print("Group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
 
-    def print_groups(self):
+    def print_groups(self, url="https://web.whatsapp.com/"):
         try:
-            self.get_group_list()
+            self.get_group_list(url)
         except Exception:
-            return
+            return False
         print(30 * '#' + " GROUP LIST " + 30 * '#')
         for group in self.group_list:
             print(group)
         print(70 * '#')
+        return self.group_list
 
     def get_group_list(self, url="https://web.whatsapp.com/"):
         try:
