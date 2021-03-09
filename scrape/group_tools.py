@@ -118,14 +118,16 @@ class GroupTools:
     def save_single_groups_data(self, url="https://web.whatsapp.com/"):
         try:
             group = input("\nPlease Enter A Group Name: ")
-            if not os.path.exists('scrape/group_files/raw_html_files'):
+            if group == "back":
+                return None
+            elif not os.path.exists('scrape/group_files/raw_html_files'):
                 os.makedirs('scrape/group_files/raw_html_files')
             self.browser.open_browser()
             self.browser.go_to_url(url)
         except Exception:
             print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
             self.browser.close_browser()
-            return
+            return 
         html = self.__get_raw_html(group)
         time = datetime.datetime.now()
         self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
