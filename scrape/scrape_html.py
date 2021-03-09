@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
+import os
 import re
 import pandas as pd
 from scrape.system_tools import SystemTools
@@ -7,9 +8,8 @@ from scrape.system_tools import SystemTools
 
 class WhatsAppHtmlParser:
 
-    def __init__(self, html_file_name):
-        self.sys_tools = SystemTools()
-        with open(self.sys_tools.get_html_dir_path() + '/' + html_file_name, 'r') as f:
+    def __init__(self, html_file_path):
+        with open(html_file_path, 'r') as f:
             contents = f.read()
         self.soup = BeautifulSoup(contents, 'html.parser')
 
@@ -35,26 +35,10 @@ class WhatsAppHtmlParser:
     def save_pd_frame_to_csv(self, df, file_name, dest_folder):
         df.to_csv(dest_folder + '/' + file_name + '.csv')
 
-    def read_pickle_to_frame(self, file_path):
-        return pd.read_pickle(file_path)
-
-    def read_csv_to_frame(self, file_path):
-        df = pd.read_csv(file_path)
-        return df.set_index('Datetime')
-
-    def find_full_message_with_string(self, instance_of):
-        return self.soup.find(string=re.compile(instance_of))
-
-    def print_html(self):
-        print(self.soup.prettify())
-
     def __find_between(self, s, first, last):
-        try:
-            start = s.index(first) + len(first)
-            end = s.index(last, start)
-            return s[start:end]
-        except ValueError:
-            return ""
+        start = s.index(first) + len(first)
+        end = s.index(last, start)
+        return s[start:end]
 
     def __search(self, values, searchFor):
         for k in values:
@@ -65,16 +49,19 @@ class WhatsAppHtmlParser:
 
 
 class MultiProcessHtml:
+    sys_tools = SystemTools()
 
-    def __init__(self):
-        self.sys_tools = SystemTools()
-        self.raw_html_list = self.sys_tools.get_raw_html_list()
-        self.html_list = self.sys_tools.get_raw_html_list()
-        self.html_pickle_dir = self.sys_tools.get_processed_html_pickles_dir()
-
-    def process_all_raw_html_to_pickles(self):
-        self.sys_tools.clean_processed_pickle_dir()
-        for html_file in self.raw_html_list:
-            html_parser = WhatsAppHtmlParser(html_file)
-            df = html_parser.get_messages_pd_frame()
-            html_parser.save_pd_frame_to_pickle(df, html_file, self.html_pickle_dir)
+    def process_all_raw_html_to_pickles(self, raw_html_list=sys_tools.get_raw_html_list(), html_pickle_dir=sys_tools.get_processed_html_pickles_dir(), html_dir_path=sys_tools.get_html_dir_path()):
+        if not os.path.isdir(html_pickle_dir):
+            os.mkdir(html_pickle_dir)
+        else:
+            for root, dirs, files in os.walk(html_pickle_dir):
+                for file in files:
+                    os.remove(os.path.join(root, file))
+        if raw_html_list != []:
+            for html_file in raw_html_list:
+                html_parser = WhatsAppHtmlParser(html_dir_path + '/' + html_file)
+                df = html_parser.get_messages_pd_frame()
+                html_parser.save_pd_frame_to_pickle(df, html_file, html_pickle_dir)
+        else:
+            raise Exception("There are no files to process in " + html_dir_path)
