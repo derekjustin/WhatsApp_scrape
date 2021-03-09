@@ -11,7 +11,7 @@ from scrape.system_tools import SystemTools
 #############
 
 current_path = os.getcwd()
-test_page = "file://" + current_path + "/tests/test_webpages/mock_WhatsApp_Group_Invite.html"
+test_page = "file://" + current_path + "/tests/test_webpages/test_browser_tools/test_page_browser_tools.html"
 
 
 def test__init__():
@@ -40,27 +40,27 @@ def test_browser_find_element_by_xpath_with_wait():
     browser_tools = BrowserTools()
     browser_tools.open_browser()
     browser_tools.go_to_url(test_page)
-    found_element = browser_tools.browser_find_element_by_xpath_with_wait("//h2[@class='_2yzk']").text
+    found_element = browser_tools.browser_find_element_by_xpath_with_wait("//h1[@class='_2yzk']").text
     browser_tools.close_browser()
-    assert found_element == "Civil engineering videos1"
+    assert found_element == "Single element by xpath"
 
 
 def test_browser_find_multiple_elements_by_xpath_with_wait():
     browser_tools = BrowserTools()
     browser_tools.open_browser()
     browser_tools.go_to_url(test_page)
-    found_elements = browser_tools.browser_find_multiple_elements_by_xpath_with_wait("//a[@class='_36or']")
+    found_elements = browser_tools.browser_find_multiple_elements_by_xpath_with_wait("//h2[@class='_36or']")
     browser_tools.close_browser()
-    assert len(found_elements) == 7
+    assert len(found_elements) == 3
 
 
 def test_browser_find_element_by_link_text_with_wait():
     browser_tools = BrowserTools()
     browser_tools.open_browser()
     browser_tools.go_to_url(test_page)
-    found_element = browser_tools.browser_find_element_by_link_text_with_wait("WhatsApp Web").text
+    found_element = browser_tools.browser_find_element_by_link_text_with_wait("Element by link text").text
     browser_tools.close_browser()
-    assert found_element == "WhatsApp Web"
+    assert found_element == "Element by link text"
 
 
 def test_browser_go_to_url():

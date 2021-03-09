@@ -9,7 +9,7 @@ from scrape.group_tools import BrowserTools
 # Tests group_tools.py
 #############
 
-test_page = ("file://" + os.getcwd() + "/tests/test_webpages/mock_WhatsApp.html")
+main_test_page = ("file://" + os.getcwd() + "/tests/test_webpages/test_group_tools/test_main_page_group_tools.html")
 
 
 def test__init__():
@@ -19,13 +19,11 @@ def test__init__():
     assert type(group_tools.group_elements) == list and len(group_tools.group_elements) == 0
     assert type(group_tools.group_list) == list and len(group_tools.group_list) == 0
 
-
-"""
-def test_join_group(monkeypatch):
+def test_join_group_cli(monkeypatch):
     group_tools = GroupTools()
-    monkeypatch.setattr('sys.stdin', test_page)
-    group_tools.join_group()
-"""
+#    group_tools.join_group_cli().input = lambda: test_page
+    monkeypatch.setattr('builtins.input', lambda _: main_test_page)
+    group_tools.join_group_cli()
 
 
 """
