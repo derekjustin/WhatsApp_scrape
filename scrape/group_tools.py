@@ -21,14 +21,18 @@ class GroupTools:
         self.group_elements = []
         self.group_list = []
 
-    def join_group_cli(self):
+    def join_group_cli(self, timeout=60):
         group_link = input("Please enter a WhatsApp group link or 'back to return to group_tools menu: ")
         if group_link == 'back':
-            return
+            return None
         self.browser.open_browser()
-        if self.__navigate_join_screens_and_return_success(group_link) is False:
+        if self.__navigate_join_screens_and_return_success(group_link, timeout) is False:
             print("\n\nFailed to join group: " + group_link + "\nCheck to make sure the link is valid.")
-        self.browser.close_browser()
+            self.browser.close_browser()
+            return False
+        else:
+            self.browser.close_browser()
+            return True
 
     def join_group_gui(self, group_link):
         self.browser.open_browser()
@@ -36,21 +40,21 @@ class GroupTools:
         self.browser.close_browser()
         return success
 
-    def join_multiple_groups_cli(self):
+    def join_multiple_groups_cli(self, timeout=60):
         try:
             if not os.path.exists('scrape/group_files/groups_to_join'):
                 os.makedirs('scrape/group_files/groups_to_join')
             if not os.path.exists('scrape/group_files/groups_failed'):
                 os.makedirs('scrape/group_files/groups_failed')
         except Exception:
-            return
+            return None
         while True:
             file_name = input("Please provide name of the file to read group links from inside of the\n"
                               "'scrape/group_files/groups_to_join' folder or 'back' to return to group_tools menu: ")
             if os.path.isfile("scrape/group_files/groups_to_join/" + file_name):
                 break
             elif file_name == 'back':
-                return
+                return None
             else:
                 print("FILE DOES NOT EXIST")
         self.browser.open_browser()
@@ -60,7 +64,7 @@ class GroupTools:
                 group_link = input_group_file.readline()
                 if not group_link:
                     break
-                if self.__navigate_join_screens_and_return_success(group_link) is not True:
+                if self.__navigate_join_screens_and_return_success(group_link, timeout) is not True:
                     failed_group_file.write(group_link)
         failed_group_file.close()
         input_group_file.close()
@@ -168,21 +172,24 @@ class GroupTools:
         fp.write(html)
         fp.close()
 
-    def __navigate_join_screens_and_return_success(self, group_link):
+    def __navigate_join_screens_and_return_success(self, group_link, timeout=60):
         try:
             self.browser.go_to_url(group_link)
-            group_name = self.browser.browser_find_element_by_xpath_with_wait("//h2[@class='_2yzk']").text
-            self.browser.browser_find_element_by_xpath_with_wait("//a[@title='Follow this link to join']").click()
-            self.browser.browser_find_element_by_link_text_with_wait("use WhatsApp Web").click()
+            group_name = self.browser.browser_find_element_by_xpath_with_wait("//h2[@class='_2yzk']", timeout).text
+            self.browser.browser_find_element_by_xpath_with_wait("//a[@title='Follow this link to join']", timeout).click()
+            self.browser.browser_find_element_by_link_text_with_wait("use WhatsApp Web", timeout).click()
         except Exception:
             return False
         try:
-            self.browser.browser_find_element_by_xpath_with_wait("//div[text()='Join group']").click()
+            self.browser.browser_find_element_by_xpath_with_wait("//div[text()='Join group']", timeout).click()
         except Exception:
             pass
-        if group_name == self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group_name + "']").get_attribute("title"):
-            return True
-        else:
+        try:
+            if group_name == self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group_name + "']", timeout).get_attribute("title"):
+                return True
+            else:
+                return False
+        except Exception:
             return False
 
     def __remove_group_old_html(self, group):
