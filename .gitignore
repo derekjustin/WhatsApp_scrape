@@ -7,3 +7,7 @@ activate
 scrape/group_files/raw_html_files/*
 scrape/group_files/processed_html_pickles/*
 scrape/.scrape_html.py.swp
+htmlcov/
+.coverage
+tests/.test_system_tools.py.swp
+tests/test_html_parser/test_dne_dir/*
