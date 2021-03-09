@@ -79,5 +79,5 @@ def test_close_browser():
     try:
         assert browser_tools.driver.execute(Command.STATUS) is True
         return True
-    except:
+    except Exception:
         return False

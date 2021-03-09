@@ -11,7 +11,7 @@ echo "####################################\n"
 echo "        RUNNING STYLE GUIDE\n"
 echo "####################################\n"
 
-pycodestyle --show-source --show-pep8 --ignore=E501 scrape/ tests/ *.py
+pycodestyle --show-source --show-pep8 --ignore=E501,W504 scrape/ tests/ *.py
 
 echo "####################################\n"
 echo "        RUNNING PYTHON TESTS\n"

@@ -18,7 +18,6 @@ class GroupTools:
     def __init__(self):
         self.browser = BrowserTools()
         self.scraper = MultiProcessHtml()
-        self.scraper 
         self.group_elements = []
         self.group_list = []
 
@@ -43,7 +42,7 @@ class GroupTools:
                 os.makedirs('scrape/group_files/groups_to_join')
             if not os.path.exists('scrape/group_files/groups_failed'):
                 os.makedirs('scrape/group_files/groups_failed')
-        except:
+        except Exception:
             return
         while True:
             file_name = input("Please provide name of the file to read group links from inside of the\n"
@@ -74,7 +73,7 @@ class GroupTools:
                 os.makedirs('scrape/group_files/groups_to_join')
             if not os.path.exists('scrape/group_files/groups_failed'):
                 os.makedirs('scrape/group_files/groups_failed')
-        except:
+        except Exception:
             return False
         if os.path.isfile("scrape/group_files/groups_to_join/" + file_name):
             self.browser.open_browser()
@@ -99,7 +98,7 @@ class GroupTools:
             self.get_group_list()
             if not os.path.exists('scrape/group_files/raw_html_files'):
                 os.makedirs('scrape/group_files/raw_html_files')
-        except:
+        except Exception:
             return
         self.browser.open_browser()
         self.browser.go_to_url("https://web.whatsapp.com/")
@@ -108,8 +107,7 @@ class GroupTools:
             timestamp = datetime.datetime.now()
             self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html)
             self.__remove_group_old_html(group)
-        time.sleep(3)
-        self.scraper.process_all_raw_html_to_pickles()
+        # self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
 
@@ -120,7 +118,7 @@ class GroupTools:
                 os.makedirs('scrape/group_files/raw_html_files')
             self.browser.open_browser()
             self.browser.go_to_url("https://web.whatsapp.com/")
-        except:
+        except Exception:
             print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
             self.browser.close_browser()
             return
@@ -135,7 +133,7 @@ class GroupTools:
     def print_groups(self):
         try:
             self.get_group_list()
-        except:
+        except Exception:
             return
         print(30 * '#' + " GROUP LIST " + 30 * '#')
         for group in self.group_list:
@@ -148,7 +146,7 @@ class GroupTools:
             self.browser.open_browser()
             self.browser.go_to_url(url)
             self.group_elements = self.browser.browser_find_multiple_elements_by_xpath_with_wait("//span[@class='_35k-1 _1adfa _3-8er']")
-        except:
+        except Exception:
             self.browser.close_browser()
             print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
             return
@@ -176,11 +174,11 @@ class GroupTools:
             group_name = self.browser.browser_find_element_by_xpath_with_wait("//h2[@class='_2yzk']").text
             self.browser.browser_find_element_by_xpath_with_wait("//a[@title='Follow this link to join']").click()
             self.browser.browser_find_element_by_link_text_with_wait("use WhatsApp Web").click()
-        except:
+        except Exception:
             return False
         try:
             self.browser.browser_find_element_by_xpath_with_wait("//div[text()='Join group']").click()
-        except:
+        except Exception:
             pass
         if group_name == self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group_name + "']").get_attribute("title"):
             return True

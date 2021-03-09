@@ -19,12 +19,14 @@ def test__init__():
     assert type(group_tools.group_elements) == list and len(group_tools.group_elements) == 0
     assert type(group_tools.group_list) == list and len(group_tools.group_list) == 0
 
+
 """
 def test_join_group(monkeypatch):
     group_tools = GroupTools()
     monkeypatch.setattr('sys.stdin', test_page)
     group_tools.join_group()
 """
+
 
 """
 def test_get_group_list():
