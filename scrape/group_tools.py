@@ -2,9 +2,11 @@ import time
 import os.path
 import datetime
 import os
+import glob
 
 # Application Created Code
 from scrape.browser_tools import BrowserTools
+from scrape.scrape_html import MultiProcessHtml
 
 
 class GroupTools:
@@ -15,6 +17,8 @@ class GroupTools:
 
     def __init__(self):
         self.browser = BrowserTools()
+        self.scraper = MultiProcessHtml()
+        self.scraper 
         self.group_elements = []
         self.group_list = []
 
@@ -103,6 +107,8 @@ class GroupTools:
             html = self.__get_raw_html(group)
             time = datetime.datetime.now()
             self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
+            self.__remove_group_old_html(group)
+        self.scraper.process_all_raw_html_to_pickles()
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
 
@@ -120,6 +126,7 @@ class GroupTools:
         html = self.__get_raw_html(group)
         time = datetime.datetime.now()
         self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
+        self.scraper.process_all_raw_html_to_pickles()
         print("Group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
 
@@ -145,15 +152,15 @@ class GroupTools:
             return
         for element in self.group_elements:
             if element.get_attribute("title") != '':
-                self.group_list.append(element.text)
+                self.group_list.append(element.get_attribute('title'))
         self.browser.close_browser()
         return self.group_list
 
 # **********************PRIVATE FUNCTIONS **************************************
 
     def __get_raw_html(self, group):
-        self.browser.browser_find_element_by_xpath_with_wait("//span[text()='" + group + "']").click()
-        self.browser.browser_find_element_by_xpath_with_wait("//span[text()='" + group + "']")
+        self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group + "']").click()
+        self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group + "']")
         return self.browser.driver.page_source
 
     def __write_group_data_to_html_file(self, group, time, html):
@@ -177,3 +184,7 @@ class GroupTools:
             return True
         else:
             return False
+
+    def __remove_group_old_html(self, group):
+        found_files = glob.glob(self.browser.system_tools.get_html_dir_path() + '*_' + group)
+        print(self.browser.system_tools.get_html_dir_path() + '*_' + group)
