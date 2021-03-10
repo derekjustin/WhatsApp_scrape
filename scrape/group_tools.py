@@ -127,7 +127,7 @@ class GroupTools:
         except Exception:
             print("Please make sure you have a secure internet connection and you are signed into a whatsapp web account, then try again.")
             self.browser.close_browser()
-            return 
+            return None
         html = self.__get_raw_html(group)
         time = datetime.datetime.now()
         self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)

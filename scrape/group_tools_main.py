@@ -25,11 +25,11 @@ def main(test=False):
             tool.save_single_groups_data()
             last_func_called = "single_group_data"
         elif user_input == ("all_groups_data"):
-            if test == False:
+            if test is False:
                 tool.save_all_groups_data()
             last_func_called = "all_groups_data"
         elif user_input == ("print_groups"):
-            if test == False:
+            if test is False:
                 tool.print_groups()
             last_func_called = "print_groups"
         elif user_input == ("back"):

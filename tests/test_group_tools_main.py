@@ -20,17 +20,21 @@ def test_main_join_group(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(join_group_responses))
     assert main(True) == "join_group"
 
+
 def test_main_join_multiple_groups(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(join_multiple_group_responses))
     assert main(True) == "join_multiple_groups"
+
 
 def test_main_single_group_data(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(single_group_data_responses))
     assert main(True) == "single_group_data"
 
+
 def test_main_all_groups_data(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(all_groups_data_responses))
     assert main(True) == "all_groups_data"
+
 
 def test_main_print_groups(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(print_groups_responses))

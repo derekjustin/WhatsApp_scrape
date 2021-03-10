@@ -25,24 +25,29 @@ def test__init__():
     assert type(group_tools.group_elements) == list and len(group_tools.group_elements) == 0
     assert type(group_tools.group_list) == list and len(group_tools.group_list) == 0
 
+
 def test_success_join_group_cli(monkeypatch):
     group_tools = GroupTools()
     monkeypatch.setattr('builtins.input', lambda _: success_test_page)
-    assert group_tools.join_group_cli() == True
+    assert group_tools.join_group_cli() is True
+
 
 def test_fail_join_group_cli(monkeypatch):
     group_tools = GroupTools()
     monkeypatch.setattr('builtins.input', lambda _: fail_test_page)
-    assert group_tools.join_group_cli(timeout) == False
+    assert group_tools.join_group_cli(timeout) is False
+
 
 def test_back_join_group_cli(monkeypatch):
     group_tools = GroupTools()
     monkeypatch.setattr('builtins.input', lambda _: back_page)
-    assert group_tools.join_group_cli() == None
+    assert group_tools.join_group_cli() is None
+
 
 def test_join_group_gui():
     group_tools = GroupTools()
-    assert group_tools.join_group_gui(success_test_page) == True
+    assert group_tools.join_group_gui(success_test_page) is True
+
 
 def test_success_join_multiple_groups_cli(monkeypatch):
     try:
@@ -64,10 +69,12 @@ def test_success_join_multiple_groups_cli(monkeypatch):
     os.remove(os.getcwd() + "/scrape/group_files/groups_to_join/" + test_local_groups_file)
     os.remove(os.getcwd() + "/scrape/group_files/groups_failed/" + test_local_groups_file)
 
+
 def test_back_join_multiple_groups_cli(monkeypatch):
     group_tools = GroupTools()
     monkeypatch.setattr('builtins.input', lambda _: back_page)
-    assert group_tools.join_multiple_groups_cli() == None
+    assert group_tools.join_multiple_groups_cli() is None
+
 
 def test_join_multiple_groups_gui():
     try:
@@ -88,6 +95,7 @@ def test_join_multiple_groups_gui():
     os.remove(os.getcwd() + "/scrape/group_files/groups_to_join/" + test_local_groups_file)
     os.remove(os.getcwd() + "/scrape/group_files/groups_failed/" + test_local_groups_file)
 
+
 def test_save_all_groups_data():
     group_tools = GroupTools()
     group_tools.save_all_groups_data(success_test_page)
@@ -95,6 +103,7 @@ def test_save_all_groups_data():
     assert len(test_html_files) == 2
     for file in test_html_files:
         os.remove(file)
+
 
 def test_save_single_groups_data(monkeypatch):
     group_tools = GroupTools()
@@ -104,6 +113,7 @@ def test_save_single_groups_data(monkeypatch):
     assert len(test_html_files) == 1
     for file in test_html_files:
         os.remove(file)
+
 
 def test_print_groups():
     group_tools = GroupTools()
