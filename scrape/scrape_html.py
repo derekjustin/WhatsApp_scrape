@@ -19,7 +19,7 @@ class WhatsAppHtmlParser:
             currentDict = tag.attrs
             if "class" in currentDict:
                 if self.__search(currentDict, 'copyable-text'):
-                    if (len(currentDict) <= 2):
+                    if (len(currentDict) <= 2 and 'data-pre-plain-text' in currentDict):
                         theFinalDict = currentDict
                         dateNameString = theFinalDict["data-pre-plain-text"]
                         timestamp = self.__find_between(dateNameString, "[", "]")
