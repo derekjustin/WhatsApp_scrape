@@ -93,7 +93,7 @@ class WhatsScrapeGUI:
 
     def __get_failed_group_list(self, file_name):
         failed_group_text = ""
-        with open("scrape/group_files/groups_to_join/" + file_name, 'r') as failed_group_file:
+        with open("scrape/group_files/groups_failed/" + file_name, 'r') as failed_group_file:
             while True:
                 failed_link = failed_group_file.readline()
                 if not failed_link:
