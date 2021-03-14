@@ -14,7 +14,7 @@ class WhatsAppHtmlParser:
         self.soup = BeautifulSoup(contents, 'html.parser')
 
     def get_messages_pd_frame(self):
-        df = pd.DataFrame(columns=['Datetime', 'Author', 'Message'])
+        df = pd.DataFrame(columns=['date_time', 'author', 'message'])
         for tag in self.soup.find_all('div'):
             currentDict = tag.attrs
             if "class" in currentDict:
@@ -25,8 +25,8 @@ class WhatsAppHtmlParser:
                         timestamp = self.__find_between(dateNameString, "[", "]")
                         datetime_object = datetime.strptime(timestamp, '%I:%M %p, %m/%d/%Y')
                         msgAuthor = self.__find_between(dateNameString, "] ", ":")
-                        df = df.append({'Datetime': datetime_object, 'Author': msgAuthor, 'Message': tag.text}, ignore_index=True)
-        df = df.set_index('Datetime')
+                        df = df.append({'date_time': datetime_object, 'author': msgAuthor, 'message': tag.text}, ignore_index=True)
+        df = df.set_index('date_time')
         return df
 
     def save_pd_frame_to_pickle(self, df, file_name, dest_folder):
