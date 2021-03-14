@@ -1,7 +1,7 @@
 from appdirs import *
 import platform
 import os
-import re
+import glob
 
 
 class SystemTools:
@@ -48,3 +48,13 @@ class SystemTools:
 
     def get_processed_html_pickles_dir(self):
         return self.get_cwd_path() + '/scrape/group_files/processed_html_pickles'
+    
+    def get_processed_pck_list(self):
+    #This can be made its own function
+        #files = glob.glob("/home/garage/Desktop/WhatsApp_scrape/scrape/group_files/processed_html_pickles/*.pkl")
+        return glob.glob(self.get_processed_html_pickles_dir() + "/*.pkl")
+
+    
+    
+    
+    

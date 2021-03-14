@@ -29,8 +29,8 @@ def test_save_pdFram_to_csv():
     if os.path.exists(os.getcwd() + '/tests/test_html_parser/test.csv'):
         os.remove(os.getcwd() + '/tests/test_html_parser/test.csv')
     df = pd.DataFrame(columns=['Datetime', 'Author', 'Message'])
-    whatsApp_parser = WhatsAppHtmlParser(os.getcwd() + '/tests/test_html_parser/test.html')
-    whatsApp_parser.save_pd_frame_to_csv(df, 'test', os.getcwd() + '/tests/test_html_parser')
+    multi_process = MultiProcessHtml()
+    multi_process.save_pd_frame_to_csv(df, 'test', os.getcwd() + '/tests/test_html_parser')
     assert os.path.isfile(os.getcwd() + '/tests/test_html_parser/test.csv')
 
 
