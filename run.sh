@@ -17,10 +17,6 @@ echo "####################################\n"
 echo "        RUNNING PYTHON TESTS\n"
 echo "####################################\n"
 # Run tests!
-coverage erase
-coverage run --source=scrape -m py.test --lf
-coverage report -m
-coverage html
-
+py.test --testmon
 
 python -c 'from scrape.print_endpoints import *; print_endpoints()'
