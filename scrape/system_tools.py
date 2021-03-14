@@ -37,10 +37,10 @@ class SystemTools:
     def get_sys_platform(self):
         return self.platform_os
 
-    def get_html_dir_path(self):
-        if not os.path.exists('scrape/group_files/raw_html_files'):
-            os.makedirs('scrape/group_files/raw_html_files')
-        return self.get_cwd_path() + '/scrape/group_files/raw_html_files'
+    def get_html_dir_path(self, html_dir_path= os.getcwd() + '/scrape/group_files/raw_html_files'):
+        if not os.path.exists(html_dir_path):
+            os.makedirs(html_dir_path)
+        return html_dir_path 
 
     def get_raw_html_list(self):
         html_dir = self.get_html_dir_path()
