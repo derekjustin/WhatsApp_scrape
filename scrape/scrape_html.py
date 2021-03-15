@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 from datetime import datetime
 import os
-import re
 import pandas as pd
 from scrape.system_tools import SystemTools
 
@@ -14,7 +13,7 @@ class WhatsAppHtmlParser:
         self.soup = BeautifulSoup(contents, 'html.parser')
 
     def get_messages_pd_frame(self):
-        df = pd.DataFrame(columns=['Datetime', 'Author', 'Message'])
+        df = pd.DataFrame(columns=['date_time', 'author', 'message'])
         for tag in self.soup.find_all('div'):
             currentDict = tag.attrs
             if "class" in currentDict:
@@ -25,15 +24,12 @@ class WhatsAppHtmlParser:
                         timestamp = self.__find_between(dateNameString, "[", "]")
                         datetime_object = datetime.strptime(timestamp, '%I:%M %p, %m/%d/%Y')
                         msgAuthor = self.__find_between(dateNameString, "] ", ":")
-                        df = df.append({'Datetime': datetime_object, 'Author': msgAuthor, 'Message': tag.text}, ignore_index=True)
-        df = df.set_index('Datetime')
+                        df = df.append({'date_time': datetime_object, 'author': msgAuthor, 'message': tag.text}, ignore_index=True)
+        df = df.set_index('date_time')
         return df
 
     def save_pd_frame_to_pickle(self, df, file_name, dest_folder):
         df.to_pickle(dest_folder + "/" + file_name + ".pkl")
-
-    def save_pd_frame_to_csv(self, df, file_name, dest_folder):
-        df.to_csv(dest_folder + '/' + file_name + '.csv')
 
     def __find_between(self, s, first, last):
         start = s.index(first) + len(first)
@@ -65,3 +61,24 @@ class MultiProcessHtml:
                 html_parser.save_pd_frame_to_pickle(df, html_file, html_pickle_dir)
         else:
             raise Exception("There are no files to process in " + html_dir_path)
+
+    def get_message_frame_all_groups(self, list_of_pkl=sys_tools.get_processed_pck_list()):
+        self.process_all_raw_html_to_pickles()
+        df_all = pd.DataFrame()
+        for file in list_of_pkl:
+            file_base_name = os.path.basename(file)
+            size = len(file_base_name)
+            file_name = file_base_name[17:size - 4]
+            df = pd.read_pickle(file)
+            df["group_name"] = file_name
+            df_all = df_all.append(df)
+        return df_all
+
+    def save_pd_frame_to_csv(self, df, file_name, dest_folder):
+        df.to_csv(dest_folder + '/' + file_name + '.csv')
+
+    def generate_message_summary_csv(self, df_all, dest_dir=sys_tools.get_cwd_path()):
+        summary_file_name = "whatsApp_groups_message_summary"
+        if os.path.exists(dest_dir + summary_file_name):
+            os.remove(dest_dir + summary_file_name)
+        self.save_pd_frame_to_csv(df_all, summary_file_name, dest_dir)

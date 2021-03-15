@@ -54,6 +54,14 @@ def test_get_html_dir_path():
     assert system_html_dir_path == html_dir_path
 
 
+def test_get_html_dir_path_exists():
+    system_tools = SystemTools()
+    system_html_dir_path = system_tools.get_html_dir_path(os.getcwd() + '/tests/test_dne_dir')
+    html_dir_path = os.getcwd() + '/tests/test_dne_dir'
+    assert system_html_dir_path == html_dir_path
+    os.rmdir(os.getcwd() + '/tests/test_dne_dir')
+
+
 def test_get_raw_html_list():
     system_tools = SystemTools()
     system_raw_html_list = system_tools.get_raw_html_list()

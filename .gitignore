@@ -11,3 +11,6 @@ htmlcov/
 .coverage
 tests/.test_system_tools.py.swp
 tests/test_html_parser/test_dne_dir/*
+.testmondata
+.run.sh.swp
+whatsApp_groups_message_summary.csv
