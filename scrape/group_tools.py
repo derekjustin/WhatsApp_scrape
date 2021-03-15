@@ -107,7 +107,7 @@ class GroupTools:
 
     def save_all_groups_data_cli(self,
                                  url="https://web.whatsapp.com/",
-                                 raw_html_file=system_tools.get_html_dir_path()):
+                                 raw_html_file=system_tools.get_html_dir_path() + '/'):
         try:
             self.get_group_list(url)
             if not os.path.exists(raw_html_file):
@@ -128,7 +128,7 @@ class GroupTools:
     
     def save_all_groups_data_gui(self,
                                  url="https://web.whatsapp.com/",
-                                 raw_html_file=system_tools.get_html_dir_path()):
+                                 raw_html_file=system_tools.get_html_dir_path() + '/'):
         try:
             self.get_group_list(url)
             if not os.path.exists(raw_html_file):

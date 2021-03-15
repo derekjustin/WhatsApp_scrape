@@ -29,12 +29,12 @@ def main(test=False):
                 tool.save_all_groups_data_cli()
             last_func_called = "all_groups_data"
         elif user_input == ("print_groups"):
-            if test is False:
-                tool.print_groups()
+            tool.print_groups()
             last_func_called = "print_groups"
         elif user_input == ("back"):
             break
         else:
             print("\n\n******** PLEASE ENTER A VALID OPTION OR 'quit' TO END PROGRAM.\n")
+            last_func_called = "invalid_input"
     print_endpoints()
     return last_func_called
