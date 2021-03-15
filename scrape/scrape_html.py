@@ -73,14 +73,12 @@ class MultiProcessHtml:
             df["group_name"] = file_name
             df_all = df_all.append(df)
         return df_all
-    
+
     def save_pd_frame_to_csv(self, df, file_name, dest_folder):
         df.to_csv(dest_folder + '/' + file_name + '.csv')
-        
+
     def generate_message_summary_csv(self, df_all, dest_dir=sys_tools.get_cwd_path()):
         summary_file_name = "whatsApp_groups_message_summary"
         if os.path.exists(dest_dir + summary_file_name):
             os.remove(dest_dir + summary_file_name)
-        self.save_pd_frame_to_csv(df_all, summary_file_name, dest_dir)    
-                
-      
+        self.save_pd_frame_to_csv(df_all, summary_file_name, dest_dir)

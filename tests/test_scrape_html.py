@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import datetime
 import shutil
+import glob
 
 
 def test_parser_object():
@@ -57,7 +58,7 @@ def test_MultiprocessHtml_process_all_raw_html_to_pickles():
     assert os.listdir(os.getcwd() + '/tests/test_html_parser/test_pickle_output') != []
 
 
-def test_MultiprocessHtml_process_all_raw_html_to_picklesi_mkdir():
+def test_MultiprocessHtml_process_all_raw_html_to_pickles_mkdir():
     dne_dir = os.getcwd() + '/tests/test_html_parser/test_dne_dir'
     test_html_dir = os.getcwd() + '/tests/test_html_parser/test_raw_html'
     if os.path.isdir(dne_dir):
@@ -74,3 +75,15 @@ def test_MultiprocessHtml_process_all_raw_html_to_pickles_exception():
     multi_process_html = MultiProcessHtml()
     with pytest.raises(Exception):
         multi_process_html.process_all_raw_html_to_pickles(raw_html_list=[])
+
+
+def test_generate_report():
+    summary_file_path = os.getcwd() + "/tests/test_html_parser/test_pickle_output_report/whatsApp_groups_message_summary.csv"
+    multi_process_html = MultiProcessHtml()
+    test_raw_html_dir = os.getcwd() + "/tests/test_html_parser/test_pickle_output_report/raw_html_files/"
+    test_html_pickle_dir = os.getcwd() + "/tests/test_html_parser/test_pickle_output_report/html_pickle_dir"
+    multi_process_html.process_all_raw_html_to_pickles(raw_html_list=os.listdir(test_raw_html_dir), html_pickle_dir=test_html_pickle_dir, html_dir_path=test_raw_html_dir)
+    pickle_list = glob.glob(test_html_pickle_dir + "/*.pkl")
+    df = multi_process_html.get_message_frame_all_groups(list_of_pkl=pickle_list)
+    multi_process_html.generate_message_summary_csv(df, dest_dir=os.getcwd() + "/tests/test_html_parser/test_pickle_output_report")
+    assert os.path.isfile(summary_file_path)
