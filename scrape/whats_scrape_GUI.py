@@ -94,28 +94,37 @@ class WhatsScrapeGUI:
     def make_save_all_groups_data_screen(self, calling_window):
         layout = [
             [sg.Column([[sg.Text('SAVING ALL GROUPS DATA: *** PLEASE WAIT ***', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
-            [sg.Column([[sg.Text('PLEASE WAIT for proccess to finish.\nYou will recieve a success response message when completed.', background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000')]], background_color='#d8dbd4', justification='center')]
+            [sg.Column([[sg.Text('\tPLEASE WAIT for proccess to finish.\nYou will recieve a success response message when completed.', background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000')]], background_color='#d8dbd4', justification='center')]
         ]
         calling_window.close()
         return sg.Window('SAVING ALL GROUPS DATA', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
 
-    def make_save_all_groups_data_fail_screen(self, calling_window):
+    def make_save_single_group_data_screen(self, calling_window):
         layout = [
-            [sg.Column([[sg.Text('SAVE ALL GROUPS DATA FAIL NOTIFICATION', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
+            [sg.Column([[sg.Text('SAVE SINGLE GROUPS DATA', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
+            [sg.Text('Please provide WhatsApp Web GROUP NAME: ', size=(30, 1), background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000'), sg.InputText()],
+            [sg.Column([[sg.Button('Return'), sg.Button('Submit')]], background_color='#d8dbd4', justification='center')]
+        ]
+        calling_window.close()
+        return sg.Window('SAVING ALL GROUPS DATA', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
+
+    def make_save_group_data_fail_screen(self, calling_window):
+        layout = [
+            [sg.Column([[sg.Text('SAVE GROUP(S) DATA FAIL NOTIFICATION', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
             [sg.Column([[sg.Text('Please ensure you have a secure internet connection\nand your WhatsApp Web account is signed in.', background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000')]], background_color='#d8dbd4', justification='center')],
             [sg.Column([[sg.Button('Return')]], background_color='#d8dbd4', justification='center')]
         ]
         calling_window.close()
-        return sg.Window('SAVE ALL GROUPS DATA FAIL NOTIFICATION', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
+        return sg.Window('SAVE GROUP(S) DATA FAIL NOTIFICATION', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
 
-    def make_save_all_groups_data_success_screen(self, calling_window):
+    def make_save_group_data_success_screen(self, calling_window):
         layout = [
-            [sg.Column([[sg.Text('SAVE ALL GROUPS DATA SUCCESS NOTIFICATION', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
+            [sg.Column([[sg.Text('SAVE GROUP(S) DATA SUCCESS NOTIFICATION', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
             [sg.Column([[sg.Text('All your group data has been saved SUCCESSFULLY!', background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000')]], background_color='#d8dbd4', justification='center')],
             [sg.Column([[sg.Button('Return')]], background_color='#d8dbd4', justification='center')]
         ]
         calling_window.close()
-        return sg.Window('SAVE ALL GROUPS DATA SUCCESS NOTIFICATION', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
+        return sg.Window('SAVE GROUP(S) DATA SUCCESS NOTIFICATION', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
 
 # *************** PRIVATE FUNCTIONS ***************************
 
