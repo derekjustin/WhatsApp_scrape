@@ -22,11 +22,11 @@ def main(test=False):
             tool.join_multiple_groups_cli()
             last_func_called = "join_multiple_groups"
         elif user_input == ("single_group_data"):
-            tool.save_single_groups_data()
+            tool.save_single_groups_data_cli()
             last_func_called = "single_group_data"
         elif user_input == ("all_groups_data"):
             if test is False:
-                tool.save_all_groups_data()
+                tool.save_all_groups_data_cli()
             last_func_called = "all_groups_data"
         elif user_input == ("print_groups"):
             if test is False:

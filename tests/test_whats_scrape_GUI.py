@@ -12,7 +12,9 @@ def test_init():
     assert type(gui.group_tools) == type(group_type)
 
 
+"""
 def test_make_home_menu():
     gui = WhatsScrapeGUI()
     gui.make_home_menu()
-    
+    assert gui.
+"""
