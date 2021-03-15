@@ -1,6 +1,7 @@
 from scrape.scrape_html import MultiProcessHtml
 from scrape.print_endpoints import *
 from scrape.system_tools import SystemTools
+import pandas as pd
 
 
 def main():
@@ -9,12 +10,13 @@ def main():
     scrape_html = MultiProcessHtml()
     while True:
         print("\n" + 10 * "#" + " GROUP SCRAPE MENU " + 10 * "#" + "\nPlease choose one of the following options\n")
-        user_input = input("\nscrape_html_messages: scrape all messages from folder " + system_tools.get_html_dir_path() + "\n\n" +
+        user_input = input("\ngenerate_message_csv: generate a csv and save to " + system_tools.get_cwd_path() + "\n\n"
                            "back: return to main menu\n\nUSER INPUT: ")
         print("")
-        if user_input == ("scrape_html_messages"):
-            scrape_html.process_all_raw_html_to_pickles()
-            print("\n\n\n *****Scraped messages saved to*****\n" + system_tools.get_processed_html_pickles_dir())
+        if user_input == ("generate_message_csv"):
+            df = pd.DataFrame()
+            df = scrape_html.get_message_frame_all_groups()
+            scrape_html.generate_message_summary_csv(df)
         elif user_input == ("back"):
             break
         else:
