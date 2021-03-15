@@ -103,7 +103,7 @@ class GroupTools:
             if not os.path.exists('scrape/group_files/raw_html_files'):
                 os.makedirs('scrape/group_files/raw_html_files')
         except Exception:
-            return
+            return False
         self.browser.open_browser()
         self.browser.go_to_url(url)
         for group in self.group_list:
@@ -114,6 +114,7 @@ class GroupTools:
         # self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
+        return True
 
     def save_single_groups_data(self, url="https://web.whatsapp.com/"):
         try:
