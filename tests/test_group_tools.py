@@ -96,19 +96,19 @@ def test_join_multiple_groups_gui():
     os.remove(os.getcwd() + "/scrape/group_files/groups_failed/" + test_local_groups_file)
 
 
-def test_save_all_groups_data():
+def test_save_all_groups_data_cli():
     group_tools = GroupTools()
-    group_tools.save_all_groups_data(success_test_page)
+    group_tools.save_all_groups_data_cli(success_test_page)
     test_html_files = glob.glob(os.getcwd() + '/scrape/group_files/raw_html_files/*_Group*')
     assert len(test_html_files) == 2
     for file in test_html_files:
         os.remove(file)
 
 
-def test_save_single_groups_data(monkeypatch):
+def test_save_single_groups_data_cli(monkeypatch):
     group_tools = GroupTools()
     monkeypatch.setattr('builtins.input', lambda _: single_group_name)
-    group_tools.save_single_groups_data(success_test_page)
+    group_tools.save_single_groups_data_cli(success_test_page)
     test_html_files = glob.glob(os.getcwd() + '/scrape/group_files/raw_html_files/*_GroupONE')
     assert len(test_html_files) == 1
     for file in test_html_files:
