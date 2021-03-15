@@ -2,6 +2,8 @@ from scrape.scrape_html import MultiProcessHtml
 from scrape.print_endpoints import *
 from scrape.system_tools import SystemTools
 import pandas as pd
+import glob
+import os
 
 
 def main():
@@ -16,7 +18,7 @@ def main():
         if user_input == ("generate_message_csv"):
             scrape_html.process_all_raw_html_to_pickles()
             df = pd.DataFrame()
-            df = scrape_html.get_message_frame_all_groups()
+            df = scrape_html.get_message_frame_all_groups(glob.glob(os.getcwd() + "/scrape/group_files/processed_html_pickles/*.pkl"))
             scrape_html.generate_message_summary_csv(df)
         elif user_input == ("back"):
             break
