@@ -157,6 +157,12 @@ def test_remove_group_old_html():
         fp.write("\n")
     fp.close()
     group_tools = GroupTools()
+    group_tools.save_single_groups_data_gui(single_group_name,
+                                         url=success_test_page,
+                                         raw_html_file=test_raw_html_path)
+    test_html_files = glob.glob(test_raw_html_path + '*_GroupONE')
+    assert len(test_html_files) == 1
+    shutil.rmtree(test_raw_html_path, ignore_errors=True)
 
 
 def test_print_groups():
