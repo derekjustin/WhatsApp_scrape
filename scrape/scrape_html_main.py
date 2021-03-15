@@ -14,6 +14,7 @@ def main():
                            "back: return to main menu\n\nUSER INPUT: ")
         print("")
         if user_input == ("generate_message_csv"):
+            scrape_html.process_all_raw_html_to_pickles()
             df = pd.DataFrame()
             df = scrape_html.get_message_frame_all_groups()
             scrape_html.generate_message_summary_csv(df)
