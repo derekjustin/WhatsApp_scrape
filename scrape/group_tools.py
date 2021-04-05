@@ -121,7 +121,7 @@ class GroupTools:
             timestamp = datetime.datetime.now()
             self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html, raw_html_file)
             self.__remove_group_old_html(group, raw_html_file)
-        # self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
+        self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
         return True
@@ -142,7 +142,7 @@ class GroupTools:
             timestamp = datetime.datetime.now()
             self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html, raw_html_file)
             self.__remove_group_old_html(group, raw_html_file)
-        # self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
+        self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
         self.browser.close_browser()
         return True
 
