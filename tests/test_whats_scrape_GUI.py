@@ -1,3 +1,5 @@
+import os
+
 from scrape.whats_scrape_GUI import WhatsScrapeGUI
 from scrape.group_tools import GroupTools
 
@@ -119,9 +121,12 @@ def test_make_multiple_group_failure_screen():
 
 
 def test_make_multiple_group_success_screen():
+    with open("scrape/group_files/groups_failed/TESTSUCCESS", "w+") as fp:
+        fp.write("\n")
+    fp.close()
     gui = WhatsScrapeGUI()
     window = gui.make_home_menu()
-    window = gui.make_multiple_group_success_screen(window, "I SUCCEEDED")
+    window = gui.make_multiple_group_success_screen(window, "TESTSUCCESS")
     message_1 = window.Element(key='-MESSAGE_1-', silent_on_error=True)
     message_2 = window.Element(key='-MESSAGE_2-', silent_on_error=True)
     message_3 = window.Element(key='-MESSAGE_3-', silent_on_error=True)
@@ -133,6 +138,7 @@ def test_make_multiple_group_success_screen():
     assert output_1.Key == '-OUTPUT_1-'
     assert quiter.Key == '-QUITER-'
     window.close()
+    os.remove("scrape/group_files/groups_failed/TESTSUCCESS")
 
 
 def test_make_save_all_groups_data_screen():
