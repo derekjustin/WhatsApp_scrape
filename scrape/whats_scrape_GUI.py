@@ -11,7 +11,7 @@ class WhatsScrapeGUI:
     def make_home_menu(self):
         layout = [
             [sg.Column([[sg.Text('Welcome to the WhatsApp Web Scraping Tool', key='-MESSAGE_1-', font=['Comic', 30, 'bold'], text_color='#ffffff', background_color='#2e9688')]], background_color='#2e9688')],
-            [sg.Column([[sg.Text('Please Choose One Of The Following Options!', key='-MESSAGE_2-' , font=['Comic', 20, 'bold'], text_color='#000000', background_color='#d8dbd4')]], background_color='#d8dbd4', justification='center', pad=(50, 50))],
+            [sg.Column([[sg.Text('Please Choose One Of The Following Options!', key='-MESSAGE_2-', font=['Comic', 20, 'bold'], text_color='#000000', background_color='#d8dbd4')]], background_color='#d8dbd4', justification='center', pad=(50, 50))],
             [sg.Column([[sg.Button('Join Group', key='-JOIN_GROUP-'),
                          sg.Button('Join Multiple Groups', key='-JOIN_MULTI_GROUP-'),
                          sg.Button('Save All Groups Data', key='-ALL_GROUPS-'),
@@ -36,7 +36,7 @@ class WhatsScrapeGUI:
         layout = [
             [sg.Column([[sg.Text('JOIN A GROUP', key='-MESSAGE_1-', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
             [sg.Text('Please provide a group link to join: ', key='-INPUT_1-', size=(30, 1), background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000'), sg.InputText()],
-            [sg.Column([[sg.Button('Return', key='-QUITER-'), sg.Button('Submit')]], background_color='#d8dbd4', justification='center')]
+            [sg.Column([[sg.Button('Return', key='-QUITER-'), sg.Button('Submit', key='-SUBMIT-')]], background_color='#d8dbd4', justification='center')]
         ]
         calling_window.close()
         return sg.Window('JOIN A GROUP', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])

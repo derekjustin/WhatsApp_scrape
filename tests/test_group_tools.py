@@ -27,7 +27,6 @@ timeout = 4
 single_group_name = "GroupONE"
 
 
-
 def test__init__():
     group_tools = GroupTools()
     browser_type = BrowserTools()
@@ -61,7 +60,7 @@ def test_join_group_gui():
 
 def test_success_join_multiple_groups_cli(monkeypatch):
     if not os.path.exists(test_groups_to_join):
-                os.makedirs(test_groups_to_join)
+        os.makedirs(test_groups_to_join)
     with open(test_local_groups_path, 'w+') as fp:
         fp.write(success_test_page + "\n")
         fp.write(success_test_page + "\n")
@@ -86,7 +85,7 @@ def test_back_join_multiple_groups_cli(monkeypatch):
 
 def test_join_multiple_groups_gui():
     if not os.path.exists(test_groups_to_join):
-                os.makedirs(test_groups_to_join)
+        os.makedirs(test_groups_to_join)
     with open(test_local_groups_path, 'w+') as fp:
         fp.write(success_test_page + "\n")
         fp.write(success_test_page + "\n")
@@ -149,7 +148,7 @@ def test_save_single_groups_data_gui():
 
 def test_remove_group_old_html():
     if not os.path.exists(test_raw_html_path):
-                os.makedirs(test_raw_html_path)
+        os.makedirs(test_raw_html_path)
     with open(test_raw_html_path + '99999_' + single_group_name, 'w+') as fp:
         fp.write("\n")
     fp.close()
@@ -158,8 +157,8 @@ def test_remove_group_old_html():
     fp.close()
     group_tools = GroupTools()
     group_tools.save_single_groups_data_gui(single_group_name,
-                                         url=success_test_page,
-                                         raw_html_file=test_raw_html_path)
+                                            url=success_test_page,
+                                            raw_html_file=test_raw_html_path)
     test_html_files = glob.glob(test_raw_html_path + '*_GroupONE')
     assert len(test_html_files) == 1
     shutil.rmtree(test_raw_html_path, ignore_errors=True)

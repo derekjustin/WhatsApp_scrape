@@ -76,7 +76,7 @@ class GroupTools:
         self.browser.close_browser()
         # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
 
-    def join_multiple_groups_gui(self, 
+    def join_multiple_groups_gui(self,
                                  file_name,
                                  groups_to_join_path=system_tools.get_groups_to_join_path(),
                                  groups_failed_path=system_tools.get_groups_failed_path(),
@@ -125,7 +125,7 @@ class GroupTools:
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
         return True
-    
+
     def save_all_groups_data_gui(self,
                                  url="https://web.whatsapp.com/",
                                  raw_html_file=system_tools.get_html_dir_path() + '/'):
