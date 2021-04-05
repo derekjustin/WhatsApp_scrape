@@ -1,0 +1,3 @@
+-- USER NEEDS TO INSTALL PRIOR TO RUNNING
+    - sudo apt-get install python3-tk 
+    - python venv

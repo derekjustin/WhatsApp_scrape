@@ -1,0 +1,2 @@
+Git does not save empty directories.  
+This file is needed so git will keep the empty directory 

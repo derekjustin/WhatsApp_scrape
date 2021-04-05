@@ -5,3 +5,14 @@ scrape/__pycache__/
 tests/__pycache__/
 activate
 scrape/group_files/raw_html_files/*
+scrape/group_files/processed_html_pickles/*
+scrape/.scrape_html.py.swp
+htmlcov/
+.coverage
+tests/.test_system_tools.py.swp
+tests/test_html_parser/test_dne_dir/*
+.testmondata
+.run.sh.swp
+whatsApp_groups_message_summary.csv
+tests/test_html_parser/test_message.pkl
+tests/test_html_parser/test_pickle_output/test.html.pkl
