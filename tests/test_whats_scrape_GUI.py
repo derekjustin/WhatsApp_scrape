@@ -159,7 +159,7 @@ def test_make_save_single_group_data_screen():
     message_1 = window.Element(key='-MESSAGE_1-', silent_on_error=True)
     message_2 = window.Element(key='-MESSAGE_2-', silent_on_error=True)
     quiter = window.Element(key='-QUITER-', silent_on_error=True)
-    submit = window.Element(key='-SUBMIT-', silent_on_error=True)    
+    submit = window.Element(key='-SUBMIT-', silent_on_error=True)
     assert message_1.Key == '-MESSAGE_1-'
     assert message_2.Key == '-MESSAGE_2-'
     assert quiter.Key == '-QUITER-'
