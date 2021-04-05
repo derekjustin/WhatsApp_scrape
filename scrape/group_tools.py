@@ -6,6 +6,7 @@ import glob
 
 # Application Created Code
 from scrape.browser_tools import BrowserTools
+from scrape.system_tools import SystemTools
 from scrape.scrape_html import MultiProcessHtml
 
 
@@ -14,6 +15,7 @@ class GroupTools:
     # Class to naviate Group automation for https://web.whatsapp.com/
     # through Google Chrome Browser
     #############
+    system_tools = SystemTools()
 
     def __init__(self):
         self.browser = BrowserTools()
@@ -40,26 +42,29 @@ class GroupTools:
         self.browser.close_browser()
         return success
 
-    def join_multiple_groups_cli(self, timeout=60):
+    def join_multiple_groups_cli(self,
+                                 groups_to_join_path=system_tools.get_groups_to_join_path(),
+                                 groups_failed_path=system_tools.get_groups_failed_path(),
+                                 timeout=60):
         try:
-            if not os.path.exists('scrape/group_files/groups_to_join'):
-                os.makedirs('scrape/group_files/groups_to_join')
-            if not os.path.exists('scrape/group_files/groups_failed'):
-                os.makedirs('scrape/group_files/groups_failed')
+            if not os.path.exists(groups_to_join_path):
+                os.makedirs(groups_to_join_path)
+            if not os.path.exists(groups_failed_path):
+                os.makedirs(groups_failed_path)
         except Exception:
             return None
         while True:
             file_name = input("Please provide name of the file to read group links from inside of the\n"
                               "'scrape/group_files/groups_to_join' folder or 'back' to return to group_tools menu: ")
-            if os.path.isfile("scrape/group_files/groups_to_join/" + file_name):
+            if os.path.isfile(groups_to_join_path + file_name):
                 break
             elif file_name == 'back':
                 return None
             else:
                 print("FILE DOES NOT EXIST")
         self.browser.open_browser()
-        with open("scrape/group_files/groups_to_join/" + file_name, 'r') as input_group_file:
-            failed_group_file = open("scrape/group_files/groups_failed/" + file_name, 'w+')
+        with open(groups_to_join_path + file_name, 'r') as input_group_file:
+            failed_group_file = open(groups_failed_path + file_name, 'w+')
             while True:
                 group_link = input_group_file.readline()
                 if not group_link:
@@ -71,18 +76,22 @@ class GroupTools:
         self.browser.close_browser()
         # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
 
-    def join_multiple_groups_gui(self, file_name, timeout=60):
+    def join_multiple_groups_gui(self, 
+                                 file_name,
+                                 groups_to_join_path=system_tools.get_groups_to_join_path(),
+                                 groups_failed_path=system_tools.get_groups_failed_path(),
+                                 timeout=60):
         try:
-            if not os.path.exists('scrape/group_files/groups_to_join'):
-                os.makedirs('scrape/group_files/groups_to_join')
-            if not os.path.exists('scrape/group_files/groups_failed'):
-                os.makedirs('scrape/group_files/groups_failed')
+            if not os.path.exists(groups_to_join_path):
+                os.makedirs(groups_to_join_path)
+            if not os.path.exists(groups_failed_path):
+                os.makedirs(groups_failed_path)
         except Exception:
             return False
-        if os.path.isfile("scrape/group_files/groups_to_join/" + file_name):
+        if os.path.isfile(groups_to_join_path + file_name):
             self.browser.open_browser()
-            with open("scrape/group_files/groups_to_join/" + file_name, 'r') as input_group_file:
-                failed_group_file = open("scrape/group_files/groups_failed/" + file_name, 'w+')
+            with open(groups_to_join_path + file_name, 'r') as input_group_file:
+                failed_group_file = open(groups_failed_path + file_name, 'w+')
                 while True:
                     group_link = input_group_file.readline()
                     if not group_link:
@@ -95,13 +104,14 @@ class GroupTools:
             return True
         else:
             return False
-        # TODO: Add functionality to check if any groups failed to join and notify user of failure or complete success.
 
-    def save_all_groups_data_cli(self, url="https://web.whatsapp.com/"):
+    def save_all_groups_data_cli(self,
+                                 url="https://web.whatsapp.com/",
+                                 raw_html_file=system_tools.get_html_dir_path() + '/'):
         try:
             self.get_group_list(url)
-            if not os.path.exists('scrape/group_files/raw_html_files'):
-                os.makedirs('scrape/group_files/raw_html_files')
+            if not os.path.exists(raw_html_file):
+                os.makedirs(raw_html_file)
         except Exception:
             return False
         self.browser.open_browser()
@@ -109,18 +119,20 @@ class GroupTools:
         for group in self.group_list:
             html = self.__get_raw_html(group)
             timestamp = datetime.datetime.now()
-            self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html)
-            self.__remove_group_old_html(group)
-        # self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
+            self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html, raw_html_file)
+            self.__remove_group_old_html(group, raw_html_file)
+        self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
         print("All group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
         return True
     
-    def save_all_groups_data_gui(self, url="https://web.whatsapp.com/"):
+    def save_all_groups_data_gui(self,
+                                 url="https://web.whatsapp.com/",
+                                 raw_html_file=system_tools.get_html_dir_path() + '/'):
         try:
             self.get_group_list(url)
-            if not os.path.exists('scrape/group_files/raw_html_files'):
-                os.makedirs('scrape/group_files/raw_html_files')
+            if not os.path.exists(raw_html_file):
+                os.makedirs(raw_html_file)
         except Exception:
             return False
         self.browser.open_browser()
@@ -128,19 +140,21 @@ class GroupTools:
         for group in self.group_list:
             html = self.__get_raw_html(group)
             timestamp = datetime.datetime.now()
-            self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html)
-            self.__remove_group_old_html(group)
-        # self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
+            self.__write_group_data_to_html_file(group, timestamp.strftime("%Y%m%d%H:%M:%S"), html, raw_html_file)
+            self.__remove_group_old_html(group, raw_html_file)
+        self.scraper.process_all_raw_html_to_pickles(self.browser.system_tools.get_raw_html_list(), self.browser.system_tools.get_processed_html_pickles_dir(), self.browser.system_tools.get_html_dir_path())
         self.browser.close_browser()
         return True
 
-    def save_single_groups_data_cli(self, url="https://web.whatsapp.com/"):
+    def save_single_groups_data_cli(self,
+                                    url="https://web.whatsapp.com/",
+                                    raw_html_file=system_tools.get_html_dir_path()):
         try:
             group = input("\nPlease Enter A Group Name: ")
             if group == "back":
                 return None
-            elif not os.path.exists('scrape/group_files/raw_html_files'):
-                os.makedirs('scrape/group_files/raw_html_files')
+            elif not os.path.exists(raw_html_file):
+                os.makedirs(raw_html_file)
             self.browser.open_browser()
             self.browser.go_to_url(url)
         except Exception:
@@ -149,16 +163,19 @@ class GroupTools:
             return None
         html = self.__get_raw_html(group)
         time = datetime.datetime.now()
-        self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
-        self.__remove_group_old_html(group)
+        self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html, raw_html_file)
+        self.__remove_group_old_html(group, raw_html_file)
         # self.scraper.process_all_raw_html_to_pickles()
         print("Group data has been saved SUCCESSFULLY.")
         self.browser.close_browser()
 
-    def save_single_groups_data_gui(self, group, url="https://web.whatsapp.com/"):
+    def save_single_groups_data_gui(self,
+                                    group,
+                                    url="https://web.whatsapp.com/",
+                                    raw_html_file=system_tools.get_html_dir_path()):
         try:
-            if not os.path.exists('scrape/group_files/raw_html_files'):
-                os.makedirs('scrape/group_files/raw_html_files')
+            if not os.path.exists(raw_html_file):
+                os.makedirs(raw_html_file)
             self.browser.open_browser()
             self.browser.go_to_url(url)
         except Exception:
@@ -166,8 +183,8 @@ class GroupTools:
             return False
         html = self.__get_raw_html(group)
         time = datetime.datetime.now()
-        self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html)
-        self.__remove_group_old_html(group)
+        self.__write_group_data_to_html_file(group, time.strftime("%Y%m%d%H:%M:%S"), html, raw_html_file)
+        self.__remove_group_old_html(group, raw_html_file)
         # self.scraper.process_all_raw_html_to_pickles()
         self.browser.close_browser()
         return True
@@ -206,8 +223,8 @@ class GroupTools:
         self.browser.browser_find_element_by_xpath_with_wait("//span[@title='" + group + "']")
         return self.browser.driver.page_source
 
-    def __write_group_data_to_html_file(self, group, time, html):
-        fp = open("scrape/group_files/raw_html_files/" + time + "_" + group, "w+")
+    def __write_group_data_to_html_file(self, group, time, html, raw_html_file):
+        fp = open(raw_html_file + time + "_" + group, "w+")
         fp.write(html)
         fp.close()
 
@@ -231,8 +248,8 @@ class GroupTools:
         except Exception:
             return False
 
-    def __remove_group_old_html(self, group):
-        found_files = glob.glob(self.browser.system_tools.get_html_dir_path() + "/*_" + group)
+    def __remove_group_old_html(self, group, raw_html_file):
+        found_files = glob.glob(raw_html_file + "/*_" + group)
         newest_html_file = ''
         for file in found_files:
             if file > newest_html_file:

@@ -51,3 +51,9 @@ class SystemTools:
 
     def get_processed_pck_list(self):
         return glob.glob(self.get_processed_html_pickles_dir() + "/*.pkl")
+
+    def get_groups_to_join_path(self):
+        return self.get_cwd_path() + '/scrape/group_files/groups_to_join/'
+
+    def get_groups_failed_path(self):
+        return self.get_cwd_path() + '/scrape/group_files/groups_failed/'
