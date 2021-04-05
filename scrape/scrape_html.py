@@ -3,7 +3,7 @@ from datetime import datetime
 import os
 import pandas as pd
 from scrape.system_tools import SystemTools
-
+import glob
 
 class WhatsAppHtmlParser:
 
@@ -62,8 +62,7 @@ class MultiProcessHtml:
         else:
             raise Exception("There are no files to process in " + html_dir_path)
 
-    def get_message_frame_all_groups(self, list_of_pkl=sys_tools.get_processed_pck_list()):
-        self.process_all_raw_html_to_pickles()
+    def get_message_frame_all_groups(self, list_of_pkl):
         df_all = pd.DataFrame()
         for file in list_of_pkl:
             file_base_name = os.path.basename(file)
