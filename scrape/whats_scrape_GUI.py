@@ -11,7 +11,7 @@ class WhatsScrapeGUI:
     def make_home_menu(self):
         layout = [
             [sg.Column([[sg.Text('Welcome to the WhatsApp Web Scraping Tool', key='-MESSAGE_1-', font=['Comic', 30, 'bold'], text_color='#ffffff', background_color='#2e9688')]], background_color='#2e9688')],
-            [sg.Column([[sg.Text('Please Choose One Of The Following Options!', key='-MESSAGE_2-' , font=['Comic', 20, 'bold'], text_color='#000000', background_color='#d8dbd4')]], background_color='#d8dbd4', justification='center', pad=(50, 50))],
+            [sg.Column([[sg.Text('Please Choose One Of The Following Options!', key='-MESSAGE_2-', font=['Comic', 20, 'bold'], text_color='#000000', background_color='#d8dbd4')]], background_color='#d8dbd4', justification='center', pad=(50, 50))],
             [sg.Column([[sg.Button('Join Group', key='-JOIN_GROUP-'),
                          sg.Button('Join Multiple Groups', key='-JOIN_MULTI_GROUP-'),
                          sg.Button('Save All Groups Data', key='-ALL_GROUPS-'),
