@@ -102,7 +102,7 @@ class WhatsScrapeGUI:
     def make_save_single_group_data_screen(self, calling_window):
         layout = [
             [sg.Column([[sg.Text('SAVE SINGLE GROUPS DATA', key='-MESSAGE_1-', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
-            [sg.Text('Please provide WhatsApp Web GROUP NAME: ', key='-MESSAGE_2-', size=(30, 1), background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000'), sg.InputText()],
+            [sg.Text('Please provide WhatsApp Web GROUP NAME: ', key='-MESSAGE_2-', size=(38, 1), background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000'), sg.InputText()],
             [sg.Column([[sg.Button('Return', key='-QUITER-'), sg.Button('Submit', key='-SUBMIT-')]], background_color='#d8dbd4', justification='center')]
         ]
         calling_window.close()
