@@ -1,11 +1,17 @@
+import pandas as pd
+
 from scrape.whats_scrape_GUI import WhatsScrapeGUI
 from scrape.group_tools import GroupTools
+from scrape.scrape_html import MultiProcessHtml
+from scrape.system_tools import SystemTools
 import time
 
 
 def main():
     gui = WhatsScrapeGUI()
     group_tools = GroupTools()
+    scrape = MultiProcessHtml()
+    system = SystemTools()
 
     while True:
         window = gui.make_home_menu()
@@ -92,3 +98,12 @@ def main():
                     if event == '-QUITER-':
                         window.close()
                         window = gui.make_home_menu()
+        elif event == '-GENERATE_CSV-':
+            df = pd.DataFrame()
+            df = scrape.get_message_frame_all_groups(system.get_processed_pck_list())
+            scrape.generate_message_summary_csv(df)
+            window = gui.make_generate_csv_screen(window)
+            event, values = window.read()
+            if event == '-QUITER-':
+                window.close()
+                window = gui.make_home_menu()

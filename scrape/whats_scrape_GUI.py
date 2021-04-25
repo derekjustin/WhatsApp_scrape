@@ -17,6 +17,7 @@ class WhatsScrapeGUI:
                          sg.Button('Save All Groups Data', key='-ALL_GROUPS-'),
                          sg.Button('Save Single Group Data', key='-SINGLE_GROUP-'),
                          sg.Button('Print Groups', key='-PRINT_GROUPS-'),
+                         sg.Button('Generate CSV', key='-GENERATE_CSV-'),
                          sg.Button('Quit', key='-QUITER-')]], background_color='#d8dbd4', justification='center')]]
         return sg.Window('Window Title', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
 
@@ -125,6 +126,15 @@ class WhatsScrapeGUI:
         ]
         calling_window.close()
         return sg.Window('SAVE GROUP(S) DATA SUCCESS NOTIFICATION', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
+
+    def make_generate_csv_screen(self, calling_window):
+        layout = [
+            [sg.Column([[sg.Text('GENERATE CSV SUCCESS NOTIFICATION', key='-MESSAGE_1-', font=['Comic', 20, 'bold'], text_color='#ffffff', background_color='#2e9688')]], justification='center')],
+            [sg.Column([[sg.Text('A csv containing all message data from your groups has been generated.\nThe file is located in the "WhatsApp_scrap" main directory.', key='-MESSAGE_2-', background_color='#d8dbd4', font=['Comic', 12, 'bold'], text_color='#000000')]], background_color='#d8dbd4', justification='center')],
+            [sg.Column([[sg.Button('Return', key='-QUITER-')]], background_color='#d8dbd4', justification='center')]
+        ]
+        calling_window.close()
+        return sg.Window('GENERATE CSV SUCCESS NOTIFICATION', layout=layout, background_color='#d8dbd4', button_color=['#000000', '#2e9688'], margins=[0, 0])
 
 # *************** PRIVATE FUNCTIONS ***************************
 
