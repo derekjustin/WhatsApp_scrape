@@ -5,6 +5,7 @@ import pandas as pd
 from scrape.system_tools import SystemTools
 import glob
 
+
 class WhatsAppHtmlParser:
 
     def __init__(self, html_file_path):

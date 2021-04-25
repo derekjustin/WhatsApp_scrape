@@ -14,6 +14,7 @@ join_multiple_group_responses = iter(['join_multiple_groups', back_page, back_pa
 single_group_data_responses = iter(['single_group_data', back_page, back_page])
 all_groups_data_responses = iter(['all_groups_data', back_page])
 print_groups_responses = iter(['print_groups', back_page])
+generate_csv_responses = iter(['generate_csv', back_page])
 invalid_input_responses = iter(['im_not_valid', back_page])
 
 
@@ -40,6 +41,11 @@ def test_main_all_groups_data(monkeypatch):
 def test_main_print_groups(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda msg: next(print_groups_responses))
     assert main() == "print_groups"
+
+
+def test_main_generate_csv(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda msg: next(generate_csv_responses))
+    assert main() == "generate_csv"
 
 
 def test_main_invalid_input(monkeypatch):
