@@ -107,3 +107,5 @@ def main():
             if event == '-QUITER-':
                 window.close()
                 window = gui.make_home_menu()
+        else:
+            quit()
