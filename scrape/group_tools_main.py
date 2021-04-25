@@ -1,9 +1,15 @@
+import pandas as pd
+
 from scrape.group_tools import GroupTools
+from scrape.scrape_html import MultiProcessHtml
+from scrape.system_tools import SystemTools
 from scrape.print_endpoints import *
 
 
 def main(test=False):
     tool = GroupTools()
+    scrape = MultiProcessHtml()
+    system = SystemTools()
     last_func_called = ""
 
     while True:
@@ -31,10 +37,15 @@ def main(test=False):
         elif user_input == ("print_groups"):
             tool.print_groups()
             last_func_called = "print_groups"
+        elif user_input == ("generate_csv"):
+            df = pd.DataFrame()
+            df = scrape.get_message_frame_all_groups(system.get_processed_pck_list())
+            scrape.generate_message_summary_csv(df)
+            last_func_called = "generate_csv"
         elif user_input == ("back"):
             break
         else:
-            print("\n\n******** PLEASE ENTER A VALID OPTION OR 'quit' TO END PROGRAM.\n")
+            print("\n\n******** PLEASE ENTER A VALID OPTION OR 'back' TO END PROGRAM.\n")
             last_func_called = "invalid_input"
     print_endpoints()
     return last_func_called
