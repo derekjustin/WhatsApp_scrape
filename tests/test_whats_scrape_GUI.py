@@ -191,3 +191,16 @@ def test_make_save_group_data_success_screen():
     assert message_2.Key == '-MESSAGE_2-'
     assert quiter.Key == '-QUITER-'
     window.close()
+
+
+def test_make_generate_csv_screen():
+    gui = WhatsScrapeGUI()
+    window = gui.make_home_menu()
+    window = gui.make_generate_csv_screen(window)
+    message_1 = window.Element(key='-MESSAGE_1-', silent_on_error=True)
+    message_2 = window.Element(key='-MESSAGE_2-', silent_on_error=True)
+    quiter = window.Element(key='-QUITER-', silent_on_error=True)
+    assert message_1.Key == '-MESSAGE_1-'
+    assert message_2.Key == '-MESSAGE_2-'
+    assert quiter.Key == '-QUITER-'
+    window.close()
